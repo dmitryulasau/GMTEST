@@ -86,7 +86,7 @@ export default function Why() {
             }}
           >
             <img
-              src="/src/assets/why_emergency.png"
+              src="https://res.cloudinary.com/dulasau/image/upload/v1707323835/GOMEDCZ/why_emergency_db51t3.png"
               alt="emergency"
               width="228px"
             ></img>
@@ -146,7 +146,7 @@ export default function Why() {
             }}
           >
             <img
-              src="/src/assets/why_appointment.png"
+              src="https://res.cloudinary.com/dulasau/image/upload/v1707323835/GOMEDCZ/why_appointment_mdpzsd.png"
               alt="appointment"
               width="228px"
             ></img>
@@ -206,7 +206,7 @@ export default function Why() {
             }}
           >
             <img
-              src="/src/assets/why_recovery.png"
+              src="https://res.cloudinary.com/dulasau/image/upload/v1707323835/GOMEDCZ/why_recovery_iarclr.png"
               alt="recovery"
               width="228px"
             ></img>
