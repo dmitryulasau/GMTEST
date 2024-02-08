@@ -134,6 +134,7 @@ function ResponsiveAppBar() {
             <img
               src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
               alt="Gomed logo"
+              style={{ maxWidth: "109px" }}
             />
           </Typography>
 
