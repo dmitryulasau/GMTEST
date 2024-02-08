@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import smoothscroll from "smoothscroll-polyfill";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,16 +36,7 @@ function ResponsiveAppBar() {
     const element = document.getElementById(targetId);
 
     if (element) {
-      // Check if it's iOS
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-      // If it's iOS, scroll on document.body, otherwise scroll on the element
-      if (isIOS) {
-        document.body.style.scrollBehavior = "smooth"; // Enable smooth scrolling for iOS
-        document.body.scrollTop = element.offsetTop;
-      } else {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+      element.scrollIntoView({ behavior: "smooth" });
       handleCloseNavMenu();
     }
   };
