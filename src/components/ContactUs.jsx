@@ -57,7 +57,7 @@ export default function ContactUs() {
           marginBottom: "8rem",
         }}
       >
-        Reach out to us directly at &nbsp;
+        Reach out to us directly at{" "}
         <span>
           <a
             href="mailto:info@gomed.cz"
