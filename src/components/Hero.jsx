@@ -140,7 +140,7 @@ export default function Hero() {
             sx={{
               position: "absolute",
               bottom: {
-                xs: "48.35%",
+                xs: "48.2%",
                 sm: "-12.5%",
                 md: "-54.5%",
                 lg: "-29.7%",
