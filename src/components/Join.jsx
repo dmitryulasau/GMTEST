@@ -34,6 +34,7 @@ export default function Join() {
           fontWeight: "bold",
           textDecoration: "underline",
           cursor: "pointer",
+          textAlign: "center",
         }}
       >
         Join Our Waitlist Now <span style={{ color: "red" }}>DELETE</span>

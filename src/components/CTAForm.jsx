@@ -11,7 +11,11 @@ import Container from "@mui/material/Container";
 
 export default function CTAForm() {
   return (
-    <Box sx={{ padding: "0 4rem 8rem 0" }}>
+    <Box
+      sx={{
+        padding: "4rem",
+      }}
+    >
       <div
         style={{ textAlign: "center", fontSize: "2rem", background: "salmon" }}
       >
