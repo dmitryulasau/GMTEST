@@ -10,7 +10,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import smoothscroll from "smoothscroll-polyfill";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -43,7 +42,7 @@ function ResponsiveAppBar() {
   return (
     <AppBar
       position="sticky"
-      sx={{ background: "var(--white)", maxWidth: "1440px" }}
+      sx={{ background: "var(--white)", width: "100%" }}
     >
       <Container sx={{}}>
         <Toolbar disableGutters>
@@ -60,8 +59,9 @@ function ResponsiveAppBar() {
             }}
           >
             <img
-              src="https://res.cloudinary.com/dulasau/image/upload/v1707163170/GOMEDCZ/gomed_logo_bg6hgl.png"
+              src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
               alt="Gomed logo"
+              style={{ maxWidth: "109px" }}
             />
           </Box>
           {/* DESKTOP LOGO END*/}

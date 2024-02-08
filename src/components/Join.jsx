@@ -13,6 +13,7 @@ export default function Join() {
         alignItems: "center",
         gap: "3rem",
         padding: "4rem 4rem",
+        marginBottom: "8rem",
       }}
     >
       <Typography
@@ -34,10 +35,9 @@ export default function Join() {
           fontWeight: "bold",
           textDecoration: "underline",
           cursor: "pointer",
-          textAlign: "center",
         }}
       >
-        Join Our Waitlist Now <span style={{ color: "red" }}>DELETE</span>
+        Join Our Waitlist Now
       </Typography>
     </Box>
   );

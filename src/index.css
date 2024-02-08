@@ -6,11 +6,6 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  -webkit-overflow-scrolling: touch;
-}
-
 html {
   font-size: 62.5% !important;
   overflow-x: hidden;

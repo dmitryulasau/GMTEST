@@ -9,6 +9,7 @@ export default function ContactUs() {
       sx={{
         background: "var(--bg-light)",
         width: "100%",
+
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -19,8 +20,9 @@ export default function ContactUs() {
     >
       <Box>
         <img
-          src="https://res.cloudinary.com/dulasau/image/upload/v1707329948/GOMEDCZ/contact_ku3s78.png"
+          src="https://res.cloudinary.com/dulasau/image/upload/v1707418251/GOMEDCZ/contact_hgedzu.png"
           alt="contact-us"
+          style={{ maxWidth: "137px" }}
         />
       </Box>
       <Typography
@@ -52,6 +54,7 @@ export default function ContactUs() {
           fontSize: "1.6rem",
           padding: "1rem",
           textAlign: "center",
+          marginBottom: "8rem",
         }}
       >
         Reach out to us directly at &nbsp;

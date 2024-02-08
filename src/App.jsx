@@ -14,40 +14,32 @@ function App() {
   return (
     <>
       <Container
-        maxWidth="xl"
+        maxWidth={false}
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          padding: "0rem !important",
+
+          padding: "0 !important",
+          margin: "0 !important",
+          width: "100%",
         }}
       >
         <div id="home" style={{}}></div>
         <Navbar />
         {/* MAIN CONTENT */}
-        <Box
-          maxWidth="144rem"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "0 !imprtant",
-          }}
-        >
-          <Hero />
-          <div id="why" style={{ height: "56px" }}></div>
-          <Why />
-          <div id="revolution" style={{ height: "56px" }}></div>
-          <Revolution />
-          <Join />
-          <div id="form" style={{ height: "96px" }}></div>
-          <CTAForm />
-          <div id="contact"></div>
-          <ContactUs />
-          <Footer />
-        </Box>
+
+        <Hero />
+        <div id="why" style={{ height: "56px" }}></div>
+        <Why />
+        <div id="revolution" style={{ height: "56px" }}></div>
+        <Revolution />
+        <Join />
+
+        <div id="contact"></div>
+        <ContactUs />
+        <Footer />
+
         {/* MAIN CONTENT END*/}
       </Container>
     </>
