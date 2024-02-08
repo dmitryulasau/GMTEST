@@ -35,7 +35,16 @@ function ResponsiveAppBar() {
     const element = document.getElementById(targetId);
 
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Check if it's iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+      // If it's iOS, scroll on document.body, otherwise scroll on the element
+      if (isIOS) {
+        document.body.style.scrollBehavior = "smooth"; // Enable smooth scrolling for iOS
+        document.body.scrollTop = element.offsetTop;
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
       handleCloseNavMenu();
     }
   };
