@@ -32,6 +32,7 @@ export default function ContactUs() {
           fontSize: "2.4rem",
           padding: "1rem",
           textAlign: "center",
+          letterSpacing: "0.02em",
         }}
       >
         Have any questions? Contact us!
@@ -55,6 +56,7 @@ export default function ContactUs() {
           padding: "1rem",
           textAlign: "center",
           marginBottom: "8rem",
+          letterSpacing: "0.02em",
         }}
       >
         Reach out to us directly at{" "}

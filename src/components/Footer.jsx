@@ -54,6 +54,7 @@ export default function Footer() {
               fontFamily: "Yaro Op Thin",
               color: "var(--white)",
               fontSize: "1.8rem",
+              letterSpacing: "0.02em",
             }}
           >
             Terms & Conditions
@@ -64,6 +65,7 @@ export default function Footer() {
               fontFamily: "Yaro Op Thin",
               color: "var(--white)",
               fontSize: "1.8rem",
+              letterSpacing: "0.02em",
             }}
           >
             Privacy Policy
@@ -90,6 +92,7 @@ export default function Footer() {
             color: "var(--white)",
             fontSize: "1.2rem",
             textAlign: "center",
+            letterSpacing: "0.02em",
           }}
         >
           Prague, Czech Republic 2024

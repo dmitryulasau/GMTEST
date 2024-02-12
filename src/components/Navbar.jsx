@@ -108,6 +108,7 @@ function ResponsiveAppBar() {
                       color: "var(--black)",
                       fontSize: "2rem",
                       fontFamily: "Yaro Rg Thin",
+                      letterSpacing: "0.02em",
                     }}
                   >
                     {page}

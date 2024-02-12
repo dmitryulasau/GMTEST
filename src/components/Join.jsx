@@ -23,6 +23,7 @@ export default function Join() {
           fontSize: "2.4rem",
           fontWeight: "bold",
           textAlign: "center",
+          letterSpacing: "0.02em",
         }}
       >
         Ready to Prioritize Your Health and Time?

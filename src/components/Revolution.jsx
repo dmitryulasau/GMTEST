@@ -50,6 +50,7 @@ export default function Revolution() {
               fontSize: "3.6rem",
               fontWeight: "bold",
               marginBottom: "1rem",
+              letterSpacing: "0.02em",
             }}
           >
             Gomed. Your Health, Accelerated.
@@ -59,6 +60,7 @@ export default function Revolution() {
               fontFamily: "Yaro Rg Thin",
               color: "var(--primary-color)",
               fontSize: "1.6rem",
+              letterSpacing: "0.02em",
             }}
           >
             Step into a new chapter of healthcare. Join our waitlist today and

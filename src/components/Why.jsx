@@ -31,6 +31,7 @@ export default function Why() {
             color: "var(--primary-color)",
             fontSize: "2.4rem",
             fontWeight: "bold",
+            letterSpacing: "0.02em",
           }}
         >
           Why choose Gomed?
@@ -52,6 +53,7 @@ export default function Why() {
             fontSize: "1.6rem",
             marginBottom: "10rem",
             textAlign: "center",
+            letterSpacing: "0.02em",
           }}
         >
           Urgent Care at Your Fingertips: <br></br>Fast, Reliable, Personalized
@@ -111,6 +113,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Speedy Healthcare
@@ -120,6 +123,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg Thin",
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Gomed values your time. Get the medical care you need, fast. No
@@ -171,6 +175,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Flexible Options
@@ -180,6 +185,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg Thin",
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Pick your healthcare plan like a ride. 'Economy' for an
@@ -200,6 +206,7 @@ export default function Why() {
               gap: "1rem",
               borderRadius: "2rem",
               padding: "3rem",
+              marginTop: { xs: "3rem" },
             }}
           >
             {/* IMAGE CONTAINER */}
@@ -231,6 +238,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Trusted Professionals
@@ -240,6 +248,7 @@ export default function Why() {
                   fontFamily: "Yaro Rg Thin",
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
+                  letterSpacing: "0.02em",
                 }}
               >
                 Our network is your advantage. Only the best doctors, ready for

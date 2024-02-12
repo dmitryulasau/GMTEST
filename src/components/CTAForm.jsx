@@ -73,6 +73,7 @@ export default function CTAForm() {
             fontWeight: "bold",
             textAlign: "center",
             padding: "0 4rem",
+            letterSpacing: "0.02em",
           }}
         >
           READY FOR A HEALTHIER TOMORROW?

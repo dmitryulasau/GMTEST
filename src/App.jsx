@@ -30,13 +30,13 @@ function App() {
         {/* MAIN CONTENT */}
 
         <Hero />
-        <div id="why" style={{ height: "56px" }}></div>
+        <div id="why" style={{ height: "8rem" }}></div>
         <Why />
-        <div id="revolution" style={{ height: "56px" }}></div>
+        <div id="revolution" style={{ height: "8rem" }}></div>
         <Revolution />
         <Join />
 
-        <div id="contact"></div>
+        <div id="contact" style={{ height: "4rem" }}></div>
         <ContactUs />
         <Footer />
 
