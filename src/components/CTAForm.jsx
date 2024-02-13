@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
@@ -152,6 +152,17 @@ export default function CTAForm() {
           borderRadius: "1.5rem",
         }}
       >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+          }}
+        >
+          <Toaster position="top-center" reverseOrder={false} />
+        </Box>
         <Typography
           sx={{
             fontFamily: "Yaro Rg",

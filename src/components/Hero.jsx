@@ -5,14 +5,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CTAForm from "./CTAForm";
 
-import toast, { Toaster } from "react-hot-toast";
-
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function Hero() {
-  const isSmScreen = useMediaQuery("(max-width:600px)");
-  const toasterPosition = isSmScreen ? "top-center" : "bottom-center";
-
   return (
     <Box
       sx={{
@@ -31,17 +26,6 @@ export default function Hero() {
         position: "relative",
       }}
     >
-      <Box
-      // sx={{
-      //   position: "absolute",
-      //   top: -12,
-      //   left: "50%",
-      //   transform: "translateX(-50%)",
-      //   width: "100%",
-      // }}
-      >
-        <Toaster position="bottom-center" reverseOrder={false} />
-      </Box>
       {/* HERO CONTENT CONTAINER */}
       <Box
         sx={{
