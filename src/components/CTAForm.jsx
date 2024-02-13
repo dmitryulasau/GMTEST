@@ -61,6 +61,8 @@ export default function CTAForm() {
   const [email, setEmail] = useState("");
   const [specialists, setSpecialists] = useState("");
 
+  const [emailError, setEmailError] = useState(false);
+
   useEffect(() => {
     axios
       .get(
@@ -96,7 +98,12 @@ export default function CTAForm() {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const input = event.target.value;
+    setEmail(input);
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailPattern.test(input);
+    setEmailError(!isValidEmail);
   };
 
   const handleSpecialistChange = (event) => {
@@ -104,6 +111,14 @@ export default function CTAForm() {
   };
 
   const handleSubmit = () => {
+    if (emailError) {
+      // Show toast message for invalid email
+      toast.error("Enter a valid email address", {
+        id: "email-error-toast",
+      });
+      return; // Stop form submission if email is invalid
+    }
+
     const formData = {
       phoneNumber: phoneNumber,
       insuranceProvider: selectedInsurance,
@@ -124,13 +139,17 @@ export default function CTAForm() {
         setEmail("");
         setSpecialists("");
         // Show success message (you can customize this message)
-        toast.success("Thank you for joining our list!");
+        toast.success("Thank you for joining our list!", {
+          id: "join-list-toast",
+        });
       })
       .catch((error) => {
         // Handle errors
         console.error("Error submitting form:", error);
         // Optionally, you can show an error message to the user
-        toast.error("Something went wrong");
+        toast.error("Something went wrong", {
+          id: "error-toast",
+        });
       });
   };
 
