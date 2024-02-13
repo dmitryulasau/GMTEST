@@ -20,7 +20,7 @@ const CssTextField = styled((props) => (
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
     fontFamily: "Yaro Op Thin",
-    color: "#787878",
+    color: "#000",
     fontSize: "1.4rem",
     overflow: "hidden",
     borderRadius: 8,
@@ -52,10 +52,12 @@ const CssTextField = styled((props) => (
 }));
 
 export default function CTAForm() {
+  // INSURANCE
   const [insuranceProviders, setInsuranceProviders] = useState([]);
   const [selectedInsurance, setSelectedInsurance] = useState("");
-
-  console.log(insuranceProviders);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [specialists, setSpecialists] = useState("");
 
   useEffect(() => {
     axios
@@ -73,6 +75,58 @@ export default function CTAForm() {
   const handleInsuranceChange = (event) => {
     setSelectedInsurance(event.target.value || "");
   };
+
+  // PHONE INPUT
+
+  const formatPhoneNumber = (input) => {
+    const cleaned = ("" + input).replace(/\D/g, "");
+
+    const formatted = cleaned.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3");
+    return formatted;
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    const input = event.target.value;
+
+    const formattedInput = formatPhoneNumber(input);
+
+    setPhoneNumber(formattedInput);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    const formData = {
+      phoneNumber: phoneNumber,
+      insuranceProvider: selectedInsurance,
+      email: email,
+      language: navigator.language || navigator.userLanguage,
+    };
+
+    console.log(formData);
+    axios
+      .post(
+        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
+        formData
+      )
+      .then((response) => {
+        console.log("Form submitted successfully:", response.data);
+        setPhoneNumber("");
+        setSelectedInsurance("");
+        setEmail("");
+        setSpecialists("");
+        // Show success message (you can customize this message)
+        alert("Form submitted successfully!");
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Error submitting form:", error);
+        // Optionally, you can show an error message to the user
+      });
+  };
+
   return (
     <Box sx={{ maxWidth: "25rem" }}>
       <div id="CTA" style={{}}></div>
@@ -105,18 +159,29 @@ export default function CTAForm() {
           READY FOR A HEALTHIER TOMORROW?
         </Typography>
 
+        {/* EMAIL */}
         <CssTextField
           id="email-input"
           label="Email Address"
           variant="filled"
           className={styles.inputField}
+          type="email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          value={email}
+          onChange={handleEmailChange}
         />
+
+        {/* PHONE */}
         <CssTextField
           id="phone-input"
           label="Phone Number"
           variant="filled"
           className={styles.inputField}
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
         />
+
+        {/* INSURANCE */}
         <CssTextField
           id="insurance-input"
           select
@@ -148,6 +213,7 @@ export default function CTAForm() {
           sx={{
             fontSize: "3rem",
           }}
+          value={specialists}
         />
         <Button
           sx={{
@@ -166,6 +232,7 @@ export default function CTAForm() {
             },
           }}
           variant="contained"
+          onClick={handleSubmit}
         >
           Join our priority waitlist
         </Button>

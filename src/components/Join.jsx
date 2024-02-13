@@ -24,7 +24,7 @@ export default function Join() {
         gap: "3rem",
         padding: "4rem 4rem",
         height: { xs: "20vh", lg: "40vh" },
-        marginBottom: "4rem",
+        marginBottom: { xs: "4rem", sm: "0" },
       }}
     >
       <Typography
