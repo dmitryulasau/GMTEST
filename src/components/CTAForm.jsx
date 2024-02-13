@@ -55,6 +55,8 @@ export default function CTAForm() {
   const [insuranceProviders, setInsuranceProviders] = useState([]);
   const [selectedInsurance, setSelectedInsurance] = useState("");
 
+  console.log(insuranceProviders);
+
   useEffect(() => {
     axios
       .get(
@@ -69,7 +71,7 @@ export default function CTAForm() {
   }, []);
 
   const handleInsuranceChange = (event) => {
-    setSelectedInsurance(event.target.value);
+    setSelectedInsurance(event.target.value || "");
   };
   return (
     <Box sx={{ maxWidth: "25rem" }}>
@@ -125,8 +127,16 @@ export default function CTAForm() {
           className={styles.inputField}
         >
           {insuranceProviders.map((insuranceProvider) => (
-            <MenuItem key={insuranceProvider.id} value={insuranceProvider.name}>
-              {insuranceProvider.name}
+            <MenuItem
+              sx={{
+                fontFamily: "Yaro Rg",
+                letterSpacing: "0.1em",
+                color: "#787878",
+              }}
+              key={insuranceProviders.indexOf(insuranceProvider)}
+              value={insuranceProvider}
+            >
+              {insuranceProvider}
             </MenuItem>
           ))}
         </CssTextField>

@@ -14,7 +14,7 @@ export default function ContactUs() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "2rem 4rem",
+        padding: "4rem 4rem",
         gap: "2rem",
       }}
     >

@@ -30,7 +30,7 @@ function App() {
         {/* MAIN CONTENT */}
 
         <Hero />
-        <div id="why" style={{ height: "8rem" }}></div>
+        <div id="why" style={{ height: "10rem" }}></div>
         <Why />
         <div id="revolution" style={{ height: "8rem" }}></div>
         <Revolution />

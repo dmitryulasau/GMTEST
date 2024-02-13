@@ -24,39 +24,52 @@ export default function Why() {
           width: "100%",
         }}
       >
-        <Typography
+        <Box
           sx={{
-            fontFamily: "Yaro Rg",
-            color: "var(--primary-color)",
-            fontSize: "2.4rem",
-            fontWeight: "bold",
-            letterSpacing: "0.02em",
+            display: "flex",
+            flexDirection: "column",
+            gap: "3rem",
+            alignItems: "center",
+            height: { lg: "35vh" },
+
+            width: "100%",
           }}
         >
-          Why choose Gomed?
-        </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Rg",
+              color: "var(--primary-color)",
+              fontSize: "2.4rem",
+              fontWeight: "bold",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Why choose Gomed?
+          </Typography>
 
-        <div
-          style={{
-            width: "10rem",
-            height: "0.3rem",
-            backgroundColor: "var(--secondary-color)",
-            borderRadius: "99rem",
-          }}
-        ></div>
+          <div
+            style={{
+              width: "10rem",
+              height: "0.3rem",
+              backgroundColor: "var(--secondary-color)",
+              borderRadius: "99rem",
+            }}
+          ></div>
 
-        <Typography
-          sx={{
-            fontFamily: "Yaro Rg Thin",
-            color: "var(--primary-color)",
-            fontSize: "1.6rem",
-            marginBottom: "10rem",
-            textAlign: "center",
-            letterSpacing: "0.02em",
-          }}
-        >
-          Urgent Care at Your Fingertips: <br></br>Fast, Reliable, Personalized
-        </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Rg Thin",
+              color: "var(--primary-color)",
+              fontSize: "1.6rem",
+              marginBottom: "10rem",
+              textAlign: "center",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Urgent Care at Your Fingertips: <br></br>Fast, Reliable,
+            Personalized
+          </Typography>
+        </Box>
 
         {/* CARDS CONTAINER */}
         <Box

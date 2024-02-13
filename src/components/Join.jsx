@@ -23,7 +23,7 @@ export default function Join() {
         alignItems: "center",
         gap: "3rem",
         padding: "4rem 4rem",
-        marginBottom: "8rem",
+        height: { xs: "20vh", lg: "40vh" },
       }}
     >
       <Typography
