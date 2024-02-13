@@ -40,7 +40,7 @@ export default function Hero() {
       //   width: "100%",
       // }}
       >
-        <Toaster position={toasterPosition} reverseOrder={false} />
+        <Toaster position="bottom-center" reverseOrder={false} />
       </Box>
       {/* HERO CONTENT CONTAINER */}
       <Box
