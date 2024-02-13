@@ -19,7 +19,7 @@ export default function Hero() {
 
         padding: "4rem",
 
-        marginBottom: "8rem",
+        marginBottom: { xs: "2rem", sm: "4rem" },
       }}
     >
       {/* HERO CONTENT CONTAINER */}
@@ -91,6 +91,7 @@ export default function Hero() {
             }}
           >
             {/* HERO HEADING  */}
+
             <Typography
               sx={{
                 fontFamily: "Yaro Rg",
@@ -102,7 +103,7 @@ export default function Hero() {
                   lg: "2rem",
                 },
                 fontWeight: "bold",
-                letterSpacing: "0.02em",
+                letterSpacing: "0.1em",
               }}
             >
               Experience prompt healthcare with

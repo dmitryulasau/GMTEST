@@ -2,8 +2,18 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
 export default function Join() {
+  const handleScroll = (page) => {
+    const targetId = "home";
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -36,9 +46,10 @@ export default function Join() {
           fontWeight: "bold",
           textDecoration: "underline",
           cursor: "pointer",
+          letterSpacing: "0.02em",
         }}
       >
-        Join Our Waitlist Now
+        <a onClick={() => handleScroll("Home")}>Join Our Waitlist Now</a>
       </Typography>
     </Box>
   );

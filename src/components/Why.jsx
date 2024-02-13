@@ -22,7 +22,6 @@ export default function Why() {
           minHeight: "52.5rem",
 
           width: "100%",
-          // maxWidth: "96rem",
         }}
       >
         <Typography
@@ -88,7 +87,7 @@ export default function Why() {
             <Box
               sx={{
                 position: "absolute",
-                top: "-30%",
+                top: { xs: "-32%", sm: "-30%" },
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
@@ -150,7 +149,7 @@ export default function Why() {
             <Box
               sx={{
                 position: "absolute",
-                top: "-30%",
+                top: { xs: "-27%", sm: "-30%" },
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
@@ -206,20 +205,19 @@ export default function Why() {
               gap: "1rem",
               borderRadius: "2rem",
               padding: "3rem",
-              marginTop: { xs: "3rem" },
             }}
           >
             {/* IMAGE CONTAINER */}
             <Box
               sx={{
                 position: "absolute",
-                top: "-35%",
+                top: "-30%",
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
             >
               <img
-                src="https://res.cloudinary.com/dulasau/image/upload/v1707418252/GOMEDCZ/why_recovery_pqtysz.png"
+                src="https://res.cloudinary.com/dulasau/image/upload/v1707789023/why_recovery_jqf5dp.png"
                 alt="recovery"
                 width="228px"
               ></img>
