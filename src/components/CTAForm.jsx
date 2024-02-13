@@ -11,6 +11,10 @@ import Container from "@mui/material/Container";
 
 import { alpha, styled } from "@mui/material/styles";
 
+import { useState, useEffect } from "react";
+import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
+
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
@@ -48,6 +52,25 @@ const CssTextField = styled((props) => (
 }));
 
 export default function CTAForm() {
+  const [insuranceProviders, setInsuranceProviders] = useState([]);
+  const [selectedInsurance, setSelectedInsurance] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers"
+      )
+      .then((response) => {
+        setInsuranceProviders(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching insurance providers:", error);
+      });
+  }, []);
+
+  const handleInsuranceChange = (event) => {
+    setSelectedInsurance(event.target.value);
+  };
   return (
     <Box sx={{ maxWidth: "25rem" }}>
       <div id="CTA" style={{}}></div>
@@ -94,10 +117,19 @@ export default function CTAForm() {
         />
         <CssTextField
           id="insurance-input"
+          select
           label="Your Medical Insurance"
           variant="filled"
+          value={selectedInsurance}
+          onChange={handleInsuranceChange}
           className={styles.inputField}
-        />
+        >
+          {insuranceProviders.map((insuranceProvider) => (
+            <MenuItem key={insuranceProvider.id} value={insuranceProvider.name}>
+              {insuranceProvider.name}
+            </MenuItem>
+          ))}
+        </CssTextField>
         <CssTextField
           id="specialist-input"
           label="Specialists You Need?"
