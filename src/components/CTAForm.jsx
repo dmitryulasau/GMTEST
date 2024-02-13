@@ -15,6 +15,8 @@ import { useState, useEffect } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
+import toast from "react-hot-toast";
+
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
@@ -122,12 +124,13 @@ export default function CTAForm() {
         setEmail("");
         setSpecialists("");
         // Show success message (you can customize this message)
-        alert("Form submitted successfully!");
+        toast.success("Thank you for joining our list!");
       })
       .catch((error) => {
         // Handle errors
         console.error("Error submitting form:", error);
         // Optionally, you can show an error message to the user
+        toast.error("Something went wrong");
       });
   };
 

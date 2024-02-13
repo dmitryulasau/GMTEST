@@ -104,6 +104,7 @@ export default function Footer() {
             color: "#ABABAB",
             fontSize: "1rem",
             textAlign: "center",
+            letterSpacing: "0.02em",
           }}
         >
           Stickers designed by kerismaker from Flaticon
