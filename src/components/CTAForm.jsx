@@ -97,6 +97,10 @@ export default function CTAForm() {
     setEmail(event.target.value);
   };
 
+  const handleSpecialistChange = (event) => {
+    setSpecialists(event.target.value);
+  };
+
   const handleSubmit = () => {
     const formData = {
       phoneNumber: phoneNumber,
@@ -214,6 +218,7 @@ export default function CTAForm() {
             fontSize: "3rem",
           }}
           value={specialists}
+          onChange={handleSpecialistChange}
         />
         <Button
           sx={{
