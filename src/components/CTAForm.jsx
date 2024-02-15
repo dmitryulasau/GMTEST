@@ -119,6 +119,14 @@ export default function CTAForm() {
       return; // Stop form submission if email is empty
     }
 
+    if (emailError) {
+      // Show toast message for invalid email
+      toast.error("Enter a valid email address", {
+        id: "email-error-toast",
+      });
+      return; // Stop form submission if email is invalid
+    }
+
     // Check if phone number is empty
     if (!phoneNumber) {
       // Show toast message for empty phone number
@@ -126,22 +134,6 @@ export default function CTAForm() {
         id: "phone-empty-toast",
       });
       return; // Stop form submission if phone number is empty
-    }
-
-    if (!specialists) {
-      // Show toast message for empty specialist field
-      toast.error("Please choose specialist", {
-        id: "specialists-empty-toast",
-      });
-      return; // Stop form submission if specialist field is empty
-    }
-
-    if (emailError) {
-      // Show toast message for invalid email
-      toast.error("Enter a valid email address", {
-        id: "email-error-toast",
-      });
-      return; // Stop form submission if email is invalid
     }
 
     const phonePattern = /^\d{9}$/;
@@ -159,6 +151,14 @@ export default function CTAForm() {
         id: "insurance-error-toast",
       });
       return; // Stop form submission if insurance provider is not selected
+    }
+
+    if (!specialists) {
+      // Show toast message for empty specialist field
+      toast.error("Please choose specialist", {
+        id: "specialists-empty-toast",
+      });
+      return; // Stop form submission if specialist field is empty
     }
 
     const formData = {
