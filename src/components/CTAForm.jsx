@@ -111,12 +111,54 @@ export default function CTAForm() {
   };
 
   const handleSubmit = () => {
+    if (!email) {
+      // Show toast message for empty email
+      toast.error("Email should not be empty", {
+        id: "email-empty-toast",
+      });
+      return; // Stop form submission if email is empty
+    }
+
+    // Check if phone number is empty
+    if (!phoneNumber) {
+      // Show toast message for empty phone number
+      toast.error("Phone number cannot be empty", {
+        id: "phone-empty-toast",
+      });
+      return; // Stop form submission if phone number is empty
+    }
+
+    if (!specialists) {
+      // Show toast message for empty specialist field
+      toast.error("Please choose specialist", {
+        id: "specialists-empty-toast",
+      });
+      return; // Stop form submission if specialist field is empty
+    }
+
     if (emailError) {
       // Show toast message for invalid email
       toast.error("Enter a valid email address", {
         id: "email-error-toast",
       });
       return; // Stop form submission if email is invalid
+    }
+
+    const phonePattern = /^\d{9}$/;
+    if (!phonePattern.test(phoneNumber.replace(/\s/g, ""))) {
+      // Show toast message for invalid phone number
+      toast.error("Phone number must be 9 digits", {
+        id: "phone-error-toast",
+      });
+      return; // Stop form submission if phone number is invalid
+    }
+
+    if (!selectedInsurance) {
+      // Show toast message for missing insurance provider
+      toast.error("Please select your insurance", {
+        id: "insurance-error-toast",
+      });
+      return; // Stop form submission if insurance provider is not selected
     }
 
     const formData = {

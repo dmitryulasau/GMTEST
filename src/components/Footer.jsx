@@ -85,18 +85,74 @@ export default function Footer() {
         ></div>
       </Box>
 
-      <Box>
-        <Typography
+      <Box
+        sx={{
+          display: "flex",
+
+          flexDirection: "column",
+        }}
+      >
+        <Box
           sx={{
-            fontFamily: "Yaro Op Thin",
-            color: "var(--white)",
-            fontSize: "1.2rem",
-            textAlign: "center",
-            letterSpacing: "0.02em",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          Prague, Czech Republic 2024
-        </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Op Thin",
+              color: "var(--white)",
+              fontSize: "1.2rem",
+
+              letterSpacing: "0.02em",
+            }}
+          >
+            Anora Makhmudovna Atakhanova
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Op Thin",
+              color: "var(--white)",
+              fontSize: "1.2rem",
+              letterSpacing: "0.02em",
+            }}
+          >
+            IČO: 09794247
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Op Thin",
+              color: "var(--white)",
+              fontSize: "1.2rem",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Legerova 356/48
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Op Thin",
+              color: "var(--white)",
+              fontSize: "1.2rem",
+
+              letterSpacing: "0.02em",
+            }}
+          >
+            12000 Praha 2
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Yaro Op Thin",
+              color: "var(--white)",
+              fontSize: "1.2rem",
+
+              letterSpacing: "0.02em",
+            }}
+          >
+            Česká republika
+          </Typography>
+        </Box>
+
         <Typography
           sx={{
             marginTop: "1rem",

@@ -68,7 +68,7 @@ export default function ContactUs() {
             info@gomed.cz
           </a>
         </span>
-        , <br></br>or drop your message in our contact form.
+        {/* , <br></br>or drop your message in our contact form. */}
       </Typography>
     </Box>
   );
