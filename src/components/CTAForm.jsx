@@ -21,6 +21,8 @@ import Joi from "joi"; // Import JOI for validation
 
 import Checkbox from "@mui/material/Checkbox";
 
+import Modal from "@mui/material/Modal";
+
 const schema = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -106,7 +108,26 @@ const CssTextField = styled((props) => (
   },
 }));
 
+// MODAL STYLE
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  maxWidth: { xs: "35rem", sm: "45rem" },
+  width: "100%",
+  bgcolor: "background.paper",
+  border: "none",
+  borderRadius: "15px",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function CTAForm() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [insuranceProviders, setInsuranceProviders] = useState([]);
   const [specialists, setSpecialists] = useState([]);
 
@@ -234,7 +255,7 @@ export default function CTAForm() {
 
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
-          height: "510px",
+          height: "570px",
         }}
       >
         <Box
@@ -381,6 +402,83 @@ export default function CTAForm() {
         >
           Join our priority waitlist
         </Button>
+        <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+          <Checkbox
+            checked={formData.agreeToPrivacyPolicy}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                agreeToPrivacyPolicy: event.target.checked,
+              })
+            }
+            color="primary"
+            sx={{
+              "&.MuiCheckbox-root": {
+                color: "var(--secondary-color)",
+              },
+              "& .MuiSvgIcon-root": { fontSize: "2rem" },
+              "&.Mui-checked": {
+                color: "var(--secondary-color)", // Change the color when the checkbox is checked
+              },
+            }}
+          />
+          <Typography
+            variant="body1"
+            sx={{
+              fontFamily: "Yaro Rg",
+              color: "var(--white)",
+              fontSize: "1.4rem",
+            }}
+          >
+            I have read and agree to the{" "}
+            <span
+              className="hover-effect"
+              style={{
+                cursor: "pointer",
+                color: "var(--secondary-color)",
+                textDecoration: "none",
+                transition: "text-decoration 0.3s ease",
+              }}
+              onClick={handleOpen}
+              onMouseEnter={(e) =>
+                (e.target.style.textDecoration = "underline")
+              }
+              onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
+            >
+              privacy policy
+            </span>
+          </Typography>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{
+                  fontFamily: "Yaro Op Thin",
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                }}
+              >
+                Privacy Policy Gomed
+              </Typography>
+              <Typography
+                id="modal-modal-description"
+                sx={{ mt: 2, fontFamily: "Yaro Op Thin", fontSize: "1.6rem" }}
+              >
+                Privacy Policy data processing involves the collection, storage,
+                and utilization of personal information in accordance with
+                applicable laws and regulations to ensure transparency,
+                security, and user consent.
+              </Typography>
+            </Box>
+          </Modal>
+        </Box>
       </Paper>
     </Box>
   );

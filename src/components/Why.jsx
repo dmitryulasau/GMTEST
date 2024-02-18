@@ -11,6 +11,7 @@ export default function Why() {
         maxWidth: "96rem",
         width: "100%",
         marginBottom: "8rem",
+        marginTop: { lg: "8rem" },
       }}
     >
       <Box

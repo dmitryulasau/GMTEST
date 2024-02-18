@@ -46,7 +46,7 @@ export default function Hero() {
 
             position: "absolute",
 
-            bottom: { xs: "57%", sm: "-60px" },
+            bottom: { xs: "60%", sm: "-60px" },
             right: { xs: "30%", sm: "330px", md: 0 },
 
             maxWidth: {
@@ -163,7 +163,7 @@ export default function Hero() {
             sx={{
               alignSelf: "center",
               position: "absolute",
-              top: "60%",
+              top: "70%",
               right: { sm: "0", md: "33%", lg: "28%", xl: "33%" },
               transform: "translateY(-50%)",
               "@media screen and (max-width: 599px)": {
