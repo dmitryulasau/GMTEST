@@ -73,7 +73,10 @@ export default function Revolution() {
           <img
             src="https://res.cloudinary.com/dulasau/image/upload/v1707418458/GOMEDCZ/revolution_app_qkjebn.png"
             alt="gomed-app"
-            style={{ maxWidth: "354px" }}
+            style={{
+              maxWidth: "354px",
+              filter: "drop-shadow(10px 7px 10px #6d5fde",
+            }}
           />
         </Box>
       </Box>

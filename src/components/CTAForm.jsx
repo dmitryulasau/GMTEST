@@ -372,7 +372,18 @@ export default function CTAForm() {
                 color: "#787878",
               }}
             >
-              <Checkbox checked={formData.specialists.includes(specialist)} />
+              <Checkbox
+                checked={formData.specialists.includes(specialist)}
+                sx={{
+                  "&.MuiCheckbox-root": {
+                    color: "var(--secondary-color)",
+                  },
+                  "& .MuiSvgIcon-root": { fontSize: "2rem" },
+                  "&.Mui-checked": {
+                    color: "var(--secondary-color)", // Change the color when the checkbox is checked
+                  },
+                }}
+              />
               {specialist.length > 20
                 ? `${(
                     specialist.charAt(0).toUpperCase() + specialist.slice(1)
