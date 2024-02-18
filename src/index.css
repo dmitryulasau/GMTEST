@@ -60,6 +60,7 @@ a:link {
   --bg-light: #9dd9f4;
   --white: #fff;
   --black: #000;
+  --error-color: #570b7f;
 }
 
 @font-face {

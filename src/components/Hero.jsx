@@ -46,7 +46,7 @@ export default function Hero() {
 
             position: "absolute",
 
-            bottom: { xs: "53%", sm: "-60px" },
+            bottom: { xs: "57%", sm: "-60px" },
             right: { xs: "30%", sm: "330px", md: 0 },
 
             maxWidth: {
@@ -142,7 +142,7 @@ export default function Hero() {
                 fontFamily: "Yaro Rg",
                 color: "var(--white)",
                 fontSize: {
-                  xs: "1.4rem",
+                  xs: "1.3rem",
                   sm: "1.4rem",
                   md: "1.2rem",
                   lg: "1.8rem",

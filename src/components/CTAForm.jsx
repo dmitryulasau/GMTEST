@@ -17,6 +17,44 @@ import axios from "axios";
 
 import toast, { Toaster } from "react-hot-toast";
 
+import Joi from "joi"; // Import JOI for validation
+
+import Checkbox from "@mui/material/Checkbox";
+
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "Email is required",
+      "string.email": "Please enter a valid email address",
+      "any.required": "Email is required",
+    }),
+  phoneNumber: Joi.string()
+    .pattern(new RegExp("^\\d{3} \\d{3} \\d{3}$"))
+    .required()
+    .messages({
+      "string.empty": "Phone number is required",
+      "string.pattern.base": "Phone should be 9 digits",
+      "any.required": "Phone number is required",
+    }),
+  insuranceProvider: Joi.string().required().messages({
+    "string.empty": "Please choose insurance",
+    "any.required": "Please select your medical insurance",
+  }),
+  specialists: Joi.array()
+    .min(1) // At least one specialist must be selected
+    .items(Joi.string()) // Each item in the array must be a string
+    .required()
+    .messages({
+      "array.min": "Please choose specialist",
+      "array.base": "Please choose specialist",
+      "array.required": "Please choose specialist",
+      "any.required": "Please choose specialist",
+    }),
+  language: Joi.string().required(),
+});
+
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
@@ -51,18 +89,37 @@ const CssTextField = styled((props) => (
       color: "var(--secondary-color)",
     },
   },
+  "& .MuiFormHelperText-root": {
+    color: "var(--error-color)",
+    fontSize: "1.1rem",
+  },
+  "& .MuiFormHelperText-root.Mui-error": {
+    // Override error text color
+    color: "var(--error-color)", // Change this to the color you desire
+  },
+  "& .MuiInputLabel-root.Mui-error": {
+    color: "var(--error-color)",
+  },
+  "& .MuiFilledInput-root.Mui-error": {
+    borderColor: "var(--error-color)",
+    boxShadow: `var(--error-color) 0 0 0 2px`,
+  },
 }));
 
 export default function CTAForm() {
-  // INSURANCE
   const [insuranceProviders, setInsuranceProviders] = useState([]);
-  const [selectedInsurance, setSelectedInsurance] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [specialists, setSpecialists] = useState("");
+  const [specialists, setSpecialists] = useState([]);
 
-  const [emailError, setEmailError] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    phoneNumber: "",
+    insuranceProvider: "",
+    specialists: [],
+    language: navigator.language || navigator.userLanguage,
+  });
+  const [errors, setErrors] = useState({});
 
+  // GET INSURANCE
   useEffect(() => {
     axios
       .get(
@@ -76,123 +133,90 @@ export default function CTAForm() {
       });
   }, []);
 
-  const handleInsuranceChange = (event) => {
-    setSelectedInsurance(event.target.value || "");
-  };
+  // GET SPECIALISTS
+  useEffect(() => {
+    axios
+      .get(
+        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng"
+      )
+      .then((response) => {
+        console.log(response.data);
+        setSpecialists(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching specialists:", error);
+      });
+  }, []);
 
-  // PHONE INPUT
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    let formattedValue = value;
 
-  const formatPhoneNumber = (input) => {
-    const cleaned = ("" + input).replace(/\D/g, "");
-
-    const formatted = cleaned.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3");
-    return formatted;
-  };
-
-  const handlePhoneNumberChange = (event) => {
-    const input = event.target.value;
-
-    const formattedInput = formatPhoneNumber(input);
-
-    setPhoneNumber(formattedInput);
-  };
-
-  const handleEmailChange = (event) => {
-    const input = event.target.value;
-    setEmail(input);
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValidEmail = emailPattern.test(input);
-    setEmailError(!isValidEmail);
-  };
-
-  const handleSpecialistChange = (event) => {
-    setSpecialists(event.target.value);
+    if (name === "specialists") {
+      // If the selected value is an array, directly set it, otherwise convert it to an array
+      const updatedSpecialists = Array.isArray(value) ? value : [value];
+      setFormData({
+        ...formData,
+        [name]: updatedSpecialists,
+      });
+    } else if (name === "phoneNumber") {
+      formattedValue = formattedValue.replace(/\D/g, "");
+      formattedValue = formattedValue.substring(0, 9); // Limit to 9 characters (assuming the format is '111 111 111')
+      formattedValue = formattedValue.replace(
+        /(\d{3})(\d{3})(\d{3})/,
+        "$1 $2 $3"
+      ); // Add spaces
+      setFormData({
+        ...formData,
+        [name]: formattedValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: formattedValue,
+      });
+    }
   };
 
   const handleSubmit = () => {
-    if (!email) {
-      // Show toast message for empty email
-      toast.error("Email should not be empty", {
-        id: "email-empty-toast",
+    const { error } = schema.validate(formData, { abortEarly: false });
+    if (error) {
+      const validationErrors = {};
+      error.details.forEach((detail) => {
+        validationErrors[detail.context.key] = detail.message;
       });
-      return; // Stop form submission if email is empty
-    }
-
-    if (emailError) {
-      // Show toast message for invalid email
-      toast.error("Enter a valid email address", {
-        id: "email-error-toast",
-      });
-      return; // Stop form submission if email is invalid
-    }
-
-    // Check if phone number is empty
-    if (!phoneNumber) {
-      // Show toast message for empty phone number
-      toast.error("Phone number cannot be empty", {
-        id: "phone-empty-toast",
-      });
-      return; // Stop form submission if phone number is empty
-    }
-
-    const phonePattern = /^\d{9}$/;
-    if (!phonePattern.test(phoneNumber.replace(/\s/g, ""))) {
-      // Show toast message for invalid phone number
-      toast.error("Phone number must be 9 digits", {
-        id: "phone-error-toast",
-      });
-      return; // Stop form submission if phone number is invalid
-    }
-
-    if (!selectedInsurance) {
-      // Show toast message for missing insurance provider
-      toast.error("Please select your insurance", {
-        id: "insurance-error-toast",
-      });
-      return; // Stop form submission if insurance provider is not selected
-    }
-
-    if (!specialists) {
-      // Show toast message for empty specialist field
-      toast.error("Please choose specialist", {
-        id: "specialists-empty-toast",
-      });
-      return; // Stop form submission if specialist field is empty
-    }
-
-    const formData = {
-      phoneNumber: phoneNumber,
-      insuranceProvider: selectedInsurance,
-      email: email,
-      language: navigator.language || navigator.userLanguage,
-    };
-
-    console.log(formData);
-    axios
-      .post(
-        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
-        formData
-      )
-      .then((response) => {
-        console.log("Form submitted successfully:", response.data);
-        setPhoneNumber("");
-        setSelectedInsurance("");
-        setEmail("");
-        setSpecialists("");
-        // Show success message (you can customize this message)
-        toast.success("Thank you for joining our list!", {
-          id: "join-list-toast",
+      setErrors(validationErrors);
+      console.log("STILL ERRORS", error); // This line indicates errors are still present
+    } else {
+      console.log(formData);
+      axios
+        .post(
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
+          formData
+        )
+        .then((response) => {
+          console.log("Form submitted successfully:", response.data);
+          setFormData({
+            email: "",
+            phoneNumber: "",
+            insuranceProvider: "",
+            specialists: [],
+            language: "",
+          });
+          setErrors({});
+          toast.success("Thank you for joining our list!", {
+            id: "join-list-toast",
+          });
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error("Error submitting form:", error);
+          // Optionally, you can show an error message to the user
+          toast.error("Something went wrong", {
+            id: "error-toast",
+          });
         });
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("Error submitting form:", error);
-        // Optionally, you can show an error message to the user
-        toast.error("Something went wrong", {
-          id: "error-toast",
-        });
-      });
+    }
   };
 
   return (
@@ -205,12 +229,12 @@ export default function CTAForm() {
 
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           flexDirection: "column",
-          gap: "1rem",
 
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
+          height: "510px",
         }}
       >
         <Box
@@ -240,61 +264,102 @@ export default function CTAForm() {
 
         {/* EMAIL */}
         <CssTextField
-          id="email-input"
+          name="email"
           label="Email Address"
           variant="filled"
-          className={styles.inputField}
           type="email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          value={email}
-          onChange={handleEmailChange}
+          value={formData.email}
+          onChange={handleInputChange}
+          error={!!errors.email}
+          helperText={errors.email}
+          sx={{
+            width: "100%",
+          }}
         />
 
         {/* PHONE */}
         <CssTextField
-          id="phone-input"
+          name="phoneNumber"
           label="Phone Number"
           variant="filled"
-          className={styles.inputField}
-          value={phoneNumber}
-          onChange={handlePhoneNumberChange}
+          value={formData.phoneNumber}
+          onChange={handleInputChange}
+          error={!!errors.phoneNumber}
+          helperText={errors.phoneNumber}
+          sx={{ width: "100%" }}
         />
 
         {/* INSURANCE */}
         <CssTextField
-          id="insurance-input"
+          name="insuranceProvider"
           select
           label="Your Medical Insurance"
           variant="filled"
-          value={selectedInsurance}
-          onChange={handleInsuranceChange}
-          className={styles.inputField}
+          value={formData.insuranceProvider}
+          onChange={handleInputChange}
+          error={!!errors.insuranceProvider}
+          helperText={errors.insuranceProvider}
+          sx={{ width: "100%" }}
         >
-          {insuranceProviders.map((insuranceProvider) => (
+          {insuranceProviders.map((insuranceProvider, index) => (
             <MenuItem
               sx={{
                 fontFamily: "Yaro Rg",
                 letterSpacing: "0.1em",
                 color: "#787878",
               }}
-              key={insuranceProviders.indexOf(insuranceProvider)}
+              key={index}
               value={insuranceProvider}
             >
               {insuranceProvider}
             </MenuItem>
           ))}
         </CssTextField>
+
+        {/* SPECIALIST */}
         <CssTextField
-          id="specialist-input"
+          name="specialists"
+          select
           label="Specialists You Need?"
           variant="filled"
-          className={styles.inputField}
-          sx={{
-            fontSize: "3rem",
+          value={formData.specialists}
+          onChange={handleInputChange}
+          error={!!errors.specialists}
+          helperText={errors.specialists}
+          SelectProps={{
+            multiple: true,
+            renderValue: (selected) => {
+              return selected
+                .map((selectedSpecialist) => {
+                  return (
+                    selectedSpecialist.charAt(0).toUpperCase() +
+                    selectedSpecialist.slice(1)
+                  );
+                })
+                .join(", ");
+            },
           }}
-          value={specialists}
-          onChange={handleSpecialistChange}
-        />
+          sx={{ width: "100%" }}
+        >
+          {specialists.map((specialist, index) => (
+            <MenuItem
+              key={index}
+              value={specialist}
+              sx={{
+                fontFamily: "Yaro Rg",
+                letterSpacing: "0.1em",
+                color: "#787878",
+              }}
+            >
+              <Checkbox checked={formData.specialists.includes(specialist)} />
+              {specialist.length > 20
+                ? `${(
+                    specialist.charAt(0).toUpperCase() + specialist.slice(1)
+                  ).substring(0, 20)}...`
+                : specialist.charAt(0).toUpperCase() + specialist.slice(1)}
+            </MenuItem>
+          ))}
+        </CssTextField>
         <Button
           sx={{
             fontFamily: "Yaro Rg",
