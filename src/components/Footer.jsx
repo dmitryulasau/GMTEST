@@ -6,6 +6,12 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 // MODAL STYLE
 const style = {
   position: "absolute",
@@ -22,6 +28,14 @@ const style = {
 };
 
 export default function Footer() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -81,7 +95,8 @@ export default function Footer() {
             }}
             onClick={handleOpen}
           >
-            Privacy Policy
+            {translations["footer.privacyPolicy"]}
+            {/* Privacy Policy */}
           </Typography>
           <Modal
             open={open}
@@ -205,7 +220,8 @@ export default function Footer() {
             letterSpacing: "0.02em",
           }}
         >
-          Stickers designed by kerismaker from Flaticon
+          {translations["footer.stickers"]}
+          {/* Stickers designed by kerismaker from Flaticon */}
         </Typography>
       </Box>
     </Box>

@@ -3,7 +3,21 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 export default function Revolution() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   return (
     <Box
       sx={{
@@ -41,7 +55,8 @@ export default function Revolution() {
               fontSize: "1.6rem",
             }}
           >
-            #HEALTHCAREREVOLUTION
+            {translations["revolution.title"]}
+            {/* #HEALTHCAREREVOLUTION */}
           </Typography>
           <Typography
             sx={{
@@ -53,7 +68,8 @@ export default function Revolution() {
               letterSpacing: "0.02em",
             }}
           >
-            Gomed. Your Health, Accelerated.
+            {translations["revolution.subtitle"]}
+            {/* Gomed. Your Health, Accelerated. */}
           </Typography>
           <Typography
             sx={{
@@ -63,9 +79,10 @@ export default function Revolution() {
               letterSpacing: "0.02em",
             }}
           >
-            Step into a new chapter of healthcare. Join our waitlist today and
+            {translations["revolution.text"]}
+            {/* Step into a new chapter of healthcare. Join our waitlist today and
             be among the first to embrace a service that values your health as
-            much as your time.
+            much as your time. */}
           </Typography>
         </Box>
         {/* IMAGE APP */}

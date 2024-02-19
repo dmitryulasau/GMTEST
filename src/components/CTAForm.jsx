@@ -23,6 +23,12 @@ import Checkbox from "@mui/material/Checkbox";
 
 import Modal from "@mui/material/Modal";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 const schema = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -124,12 +130,22 @@ const style = {
 };
 
 export default function CTAForm() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [insuranceProviders, setInsuranceProviders] = useState([]);
   const [specialists, setSpecialists] = useState([]);
+
+  const [isChecked, setIsChecked] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -139,6 +155,10 @@ export default function CTAForm() {
     language: navigator.language || navigator.userLanguage,
   });
   const [errors, setErrors] = useState({});
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
 
   // GET INSURANCE
   useEffect(() => {
@@ -161,7 +181,7 @@ export default function CTAForm() {
         "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng"
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setSpecialists(response.data);
       })
       .catch((error) => {
@@ -207,9 +227,9 @@ export default function CTAForm() {
         validationErrors[detail.context.key] = detail.message;
       });
       setErrors(validationErrors);
-      console.log("STILL ERRORS", error); // This line indicates errors are still present
+      // console.log("STILL ERRORS", error); // This line indicates errors are still present
     } else {
-      console.log(formData);
+      // console.log(formData);
       axios
         .post(
           "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
@@ -280,13 +300,14 @@ export default function CTAForm() {
             letterSpacing: "0.08em",
           }}
         >
-          READY FOR A HEALTHIER TOMORROW?
+          {translations["ctaform.title"]}
+          {/* READY FOR A HEALTHIER TOMORROW? */}
         </Typography>
 
         {/* EMAIL */}
         <CssTextField
           name="email"
-          label="Email Address"
+          label={translations["ctaform.email"]}
           variant="filled"
           type="email"
           value={formData.email}
@@ -301,7 +322,7 @@ export default function CTAForm() {
         {/* PHONE */}
         <CssTextField
           name="phoneNumber"
-          label="Phone Number"
+          label={translations["ctaform.phone"]}
           variant="filled"
           value={formData.phoneNumber}
           onChange={handleInputChange}
@@ -314,7 +335,7 @@ export default function CTAForm() {
         <CssTextField
           name="insuranceProvider"
           select
-          label="Your Medical Insurance"
+          label={translations["ctaform.insurance"]}
           variant="filled"
           value={formData.insuranceProvider}
           onChange={handleInputChange}
@@ -341,7 +362,7 @@ export default function CTAForm() {
         <CssTextField
           name="specialists"
           select
-          label="Specialists You Need?"
+          label={translations["ctaform.specialist"]}
           variant="filled"
           value={formData.specialists}
           onChange={handleInputChange}
@@ -411,18 +432,15 @@ export default function CTAForm() {
           variant="contained"
           onClick={handleSubmit}
         >
-          Join our priority waitlist
+          {translations["ctaform.submit"]}
+          {/* Join our priority waitlist */}
         </Button>
         <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
           <Checkbox
-            checked={formData.agreeToPrivacyPolicy}
-            onChange={(event) =>
-              setFormData({
-                ...formData,
-                agreeToPrivacyPolicy: event.target.checked,
-              })
-            }
+            checked={isChecked}
+            onChange={handleCheckboxChange}
             color="primary"
+            name="agreeToPrivacyPolicy"
             sx={{
               "&.MuiCheckbox-root": {
                 color: "var(--secondary-color)",
@@ -441,7 +459,8 @@ export default function CTAForm() {
               fontSize: "1.4rem",
             }}
           >
-            I have read and agree to the{" "}
+            {translations["ctaform.privacy"]}
+            {/* I have read and agree to the */}
             <span
               className="hover-effect"
               style={{
@@ -456,8 +475,11 @@ export default function CTAForm() {
               }
               onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
             >
-              privacy policy
+              {translations["ctaform.privacy2"]}
+
+              {/* privacy policy */}
             </span>
+            {language === "cz" && translations["ctaform.privacyCZ"]}
           </Typography>
           <Modal
             open={open}

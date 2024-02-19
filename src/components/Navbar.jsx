@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,24 +10,61 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import AdbIcon from "@mui/icons-material/Adb";
+
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [avatarSrc, setAvatarSrc] = React.useState(
+    "https://res.cloudinary.com/dulasau/image/upload/v1708309694/languages_nzwaaw.png"
+  );
+
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const pages = ["Home", "Patient's Journey", "About Us", "Contact Us"];
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
+  const pages = [
+    translations["navbar.home"],
+    translations["navbar.why"],
+    translations["navbar.services"],
+    translations["navbar.contact"],
+  ];
+
+  // console.log(pages);
 
   const handleScroll = (page) => {
     const targetIds = {
-      "Patient's Journey": "why",
-      "Contact Us": "contact",
-      "About Us": "revolution",
+      [translations["navbar.why"]]: "why",
+      [translations["navbar.contact"]]: "contact",
+      [translations["navbar.services"]]: "revolution",
     };
 
     const targetId = targetIds[page] || page.toLowerCase().replace(/ /g, "-");
@@ -39,10 +75,35 @@ function ResponsiveAppBar() {
       handleCloseNavMenu();
     }
   };
+
+  // Handle Language Change
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+    // console.log(newLanguage);
+    if (newLanguage === "en") {
+      setAvatarSrc(
+        "https://res.cloudinary.com/dulasau/image/upload/v1708309482/en_wioswp.png"
+      );
+    } else if (newLanguage === "cz") {
+      setAvatarSrc(
+        "https://res.cloudinary.com/dulasau/image/upload/v1708309655/cz_tvyswn.png"
+      );
+    } else if (newLanguage === "ru") {
+      setAvatarSrc(
+        "https://res.cloudinary.com/dulasau/image/upload/v1708309655/ru_yimglg.png"
+      );
+    }
+    handleCloseUserMenu();
+  };
+
+  // console.log(translations);
   return (
     <AppBar
       position="sticky"
-      sx={{ background: "var(--white)", width: "100%" }}
+      sx={{
+        background: "var(--white)",
+        width: "100%",
+      }}
     >
       <Container sx={{}}>
         <Toolbar disableGutters>
@@ -129,7 +190,7 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "flex-start",
             }}
           >
             <img
@@ -156,7 +217,7 @@ function ResponsiveAppBar() {
                   my: 2,
                   fontSize: "1.8rem",
                   fontFamily: "Yaro Rg Thin",
-                  textTransform: "capitalize",
+                  textTransform: "none",
                   color: "var(--black)",
                   display: "block",
                 }}
@@ -166,6 +227,38 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           {/* DESKTOP MENU END */}
+          {/* Language Selector */}
+          <Box sx={{ flexGrow: 0, marginLeft: "4rem" }}>
+            <Tooltip title="Language">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="language" src={avatarSrc} />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                {" "}
+                <Button onClick={() => handleLanguageChange("en")}>EN</Button>
+                <Button onClick={() => handleLanguageChange("cz")}>CZ</Button>
+                <Button onClick={() => handleLanguageChange("ru")}>RU</Button>
+              </Box>
+            </Menu>
+          </Box>
+          {/* Language Selector End */}
         </Toolbar>
       </Container>
     </AppBar>

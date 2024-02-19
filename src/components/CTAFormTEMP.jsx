@@ -182,7 +182,7 @@ export default function CTAForm() {
       language: navigator.language || navigator.userLanguage,
     };
 
-    console.log(formData);
+    // console.log(formData);
     axios
       .post(
         "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",

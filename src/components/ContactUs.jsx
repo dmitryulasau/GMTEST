@@ -3,7 +3,21 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 export default function ContactUs() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   return (
     <Box
       sx={{
@@ -35,7 +49,8 @@ export default function ContactUs() {
           letterSpacing: "0.02em",
         }}
       >
-        Have any questions? Contact us!
+        {translations["contact.title"]}
+        {/* Have any questions? Contact us! */}
       </Typography>
 
       <div
@@ -59,7 +74,8 @@ export default function ContactUs() {
           letterSpacing: "0.02em",
         }}
       >
-        Reach out to us directly at{" "}
+        {translations["contact.subtitle"]}{" "}
+        {/* Reach out to us directly at{" "} */}
         <span>
           <a
             href="mailto:info@gomed.cz"

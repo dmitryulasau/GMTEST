@@ -4,7 +4,21 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 export default function Join() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   const handleScroll = (page) => {
     const targetId = "home";
     const element = document.getElementById(targetId);
@@ -37,7 +51,8 @@ export default function Join() {
           letterSpacing: "0.02em",
         }}
       >
-        Ready to Prioritize Your Health and Time?
+        {translations["join.title"]}
+        {/* Ready to Prioritize Your Health and Time? */}
       </Typography>
       <Typography
         sx={{
@@ -48,9 +63,13 @@ export default function Join() {
           textDecoration: "underline",
           cursor: "pointer",
           letterSpacing: "0.02em",
+          textAlign: "center",
         }}
       >
-        <a onClick={() => handleScroll("Home")}>Join Our Waitlist Now</a>
+        <a onClick={() => handleScroll("Home")}>
+          {/* Join Our Waitlist Now */}
+          {translations["join.subtitle"]}
+        </a>
       </Typography>
     </Box>
   );

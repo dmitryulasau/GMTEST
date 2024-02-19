@@ -46,7 +46,7 @@ export default function Hero() {
           {/* HERO TEXT CONTAINER */}
           <Box
             sx={{
-              background: "lightgreen",
+              // background: "lightgreen",
 
               display: "flex",
               flexDirection: "column",

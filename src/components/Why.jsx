@@ -4,7 +4,21 @@ import Typography from "@mui/material/Typography";
 
 import Paper from "@mui/material/Paper";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 export default function Why() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   return (
     <Box
       sx={{
@@ -45,7 +59,8 @@ export default function Why() {
               letterSpacing: "0.02em",
             }}
           >
-            Why choose Gomed?
+            {translations["why.title"]}
+            {/* Why choose Gomed? */}
           </Typography>
 
           <div
@@ -65,10 +80,15 @@ export default function Why() {
               marginBottom: "10rem",
               textAlign: "center",
               letterSpacing: "0.02em",
+              padding: "4rem",
             }}
           >
-            Urgent Care at Your Fingertips: <br></br>Fast, Reliable,
-            Personalized
+            {translations["why.subtitle"]}
+            <br></br>
+            {translations["why.subtitle2"]}
+
+            {/* Urgent Care at Your Fingertips:{" "}
+            <br></br>Fast, Reliable, Personalized */}
           </Typography>
         </Box>
 
@@ -129,7 +149,8 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Speedy Healthcare
+                {translations["why.reason1"]}
+                {/* Speedy Healthcare */}
               </Typography>
               <Typography
                 sx={{
@@ -139,8 +160,9 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Gomed values your time. Get the medical care you need, fast. No
-                more waiting for urgent care.
+                {translations["why.reason1text"]}
+                {/* Gomed values your time. Get the medical care you need, fast. No
+                more waiting for urgent care. */}
               </Typography>
             </Box>
           </Paper>
@@ -191,7 +213,8 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Flexible Options
+                {translations["why.reason2"]}
+                {/* Flexible Options */}
               </Typography>
               <Typography
                 sx={{
@@ -201,9 +224,10 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Pick your healthcare plan like a ride. 'Economy' for an
+                {translations["why.reason2text"]}
+                {/* Pick your healthcare plan like a ride. 'Economy' for an
                 appointment within 48 hours, 'Premium' for same-day
-                consultation. Your health, your way.
+                consultation. Your health, your way. */}
               </Typography>
             </Box>
           </Paper>
@@ -253,7 +277,8 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Trusted Professionals
+                {translations["why.reason3"]}
+                {/* Trusted Professionals */}
               </Typography>
               <Typography
                 sx={{
@@ -263,8 +288,9 @@ export default function Why() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Our network is your advantage. Only the best doctors, ready for
-                quick appointments. Every visit promises quality care.
+                {translations["why.reason3text"]}
+                {/* Our network is your advantage. Only the best doctors, ready for
+                quick appointments. Every visit promises quality care. */}
               </Typography>
             </Box>
           </Paper>

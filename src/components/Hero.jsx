@@ -6,13 +6,33 @@ import Button from "@mui/material/Button";
 import CTAForm from "./CTAForm";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
+import bg from "../assets/bg.png";
+
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
 
 export default function Hero() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   return (
     <Box
       sx={{
         width: "100%",
         background: "var(--primary-color)",
+        // backgroundImage: "url('../assets/bg.png')",
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
+        // backgroundRepeat: "no-repeat",
+
         minHeight: "46rem",
 
         display: "flex",
@@ -86,12 +106,13 @@ export default function Hero() {
               // background: "lightgreen",
 
               minHeight: "34rem",
+
               display: "flex",
               flexDirection: "column",
               justifyContent: { md: "center", lg: "space-between" },
               alignSelf: { sm: "flex-start", md: "center" },
               gap: { xs: "3rem", sm: "2rem", md: "3rem" },
-              flex: { sm: "0 1 50%", md: "0 1 50%", lg: "0 0 50%" },
+              flex: { sm: "0 1 50%", md: "0 1 50%", lg: "0 1 50%" },
             }}
           >
             {/* HERO HEADING  */}
@@ -110,7 +131,8 @@ export default function Hero() {
                 letterSpacing: "0.1em",
               }}
             >
-              Experience prompt healthcare with
+              {/* Experience prompt healthcare with */}
+              {translations["hero.title"]}
             </Typography>
             {/* HERO HEADING END */}
 
@@ -150,9 +172,12 @@ export default function Hero() {
                 letterSpacing: "0.02em",
               }}
             >
-              Say goodbye to the long, anxiety-filled waits for medical
+              {translations["hero.text"]}
+              <br></br>
+              {translations["hero.text2"]}
+              {/* Say goodbye to the long, anxiety-filled waits for medical
               appointments. <br></br>With Gomed, we assure you a confirmed
-              doctor's appointment within a maximum of three days.
+              doctor's appointment within a maximum of three days. */}
             </Typography>
             {/* HERO DESCRIPTION END */}
           </Box>

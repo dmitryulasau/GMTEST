@@ -10,6 +10,8 @@ import ContactUs from "./components/ContactUs.jsx";
 import Footer from "./components/Footer.jsx";
 import Hero from "./components/Hero.jsx";
 
+import { LanguageProvider } from "./contexts/LanguageContext";
+
 function App() {
   return (
     <>
