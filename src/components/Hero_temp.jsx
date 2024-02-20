@@ -5,12 +5,34 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CTAForm from "./CTAForm";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
+import bg from "../assets/bg.png";
+
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 export default function Hero() {
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   return (
     <Box
       sx={{
         width: "100%",
         background: "var(--primary-color)",
+        // backgroundImage: "url('../assets/bg.png')",
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
+        // backgroundRepeat: "no-repeat",
+
         minHeight: "46rem",
 
         display: "flex",
@@ -19,28 +41,63 @@ export default function Hero() {
 
         padding: "4rem",
 
-        marginBottom: "8rem",
+        marginBottom: { xs: "2rem", sm: "4rem" },
+
+        position: "relative",
       }}
     >
       {/* HERO CONTENT CONTAINER */}
       <Box
         sx={{
-          background: "lightyellow",
+          // background: "lightyellow",
           width: "144rem",
+
           display: "flex",
-          justifyContent: "center",
+          justifyContent: { lg: "center" },
+          maxHeight: { sm: "340px" },
+          height: "100%",
+          position: "relative",
         }}
       >
+        {/* HERO IMAGE */}
         <Box
           sx={{
+            // backgroundColor: "rgba(100, 20, 50, 0.25)",
+
+            position: "absolute",
+
+            bottom: { xs: "60%", sm: "-60px" },
+            right: { xs: "30%", sm: "330px", md: 0 },
+
+            maxWidth: {
+              xs: "40%",
+              sm: "22%",
+              md: "32%",
+              lg: "27.5%",
+              xl: "33%",
+            },
+          }}
+        >
+          <img
+            src="https://res.cloudinary.com/dulasau/image/upload/v1707760608/GOMEDCZ/online-consultation_c7b3lt.png"
+            alt="online-consultation"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              display: "block",
+            }}
+          />
+        </Box>
+        {/* HERO IMAGE END */}
+        <Box
+          sx={{
+            maxWidth: "96rem",
+            // background: "salmon",
+
             display: "flex",
             flexDirection: { xs: "column", sm: "row" },
-            gap: { xs: "20rem" },
-            maxWidth: "96rem",
-            width: "100%",
-            background: "lightblue",
-
-            position: "relative",
+            gap: { xs: "4rem" },
+            alignItems: "center",
           }}
         >
           {/* HERO TEXT CONTAINER */}
@@ -48,29 +105,34 @@ export default function Hero() {
             sx={{
               // background: "lightgreen",
 
+              minHeight: "34rem",
+
               display: "flex",
               flexDirection: "column",
-              gap: "3rem",
-
-              flex: { md: "0 1 38%", lg: "0 0 50%" },
+              justifyContent: { md: "center", lg: "space-between" },
+              alignSelf: { sm: "flex-start", md: "center" },
+              gap: { xs: "3rem", sm: "2rem", md: "3rem" },
+              flex: { sm: "0 1 50%", md: "0 1 50%", lg: "0 1 50%" },
             }}
           >
             {/* HERO HEADING  */}
+
             <Typography
               sx={{
                 fontFamily: "Yaro Rg",
                 color: "var(--white)",
                 fontSize: {
-                  xs: "1.6rem",
+                  xs: "1.4rem",
                   sm: "1.4rem",
                   md: "1.6rem",
                   lg: "2rem",
                 },
                 fontWeight: "bold",
-                letterSpacing: "0.02em",
+                letterSpacing: "0.1em",
               }}
             >
-              Experience prompt healthcare with
+              {/* Experience prompt healthcare with */}
+              {translations["hero.title"]}
             </Typography>
             {/* HERO HEADING END */}
 
@@ -81,7 +143,7 @@ export default function Hero() {
                   xs: "140px",
                   sm: "180px",
                   md: "220px",
-                  lg: "325px",
+                  lg: "225px",
                 },
               }}
             >
@@ -102,16 +164,20 @@ export default function Hero() {
                 fontFamily: "Yaro Rg",
                 color: "var(--white)",
                 fontSize: {
-                  xs: "1.4rem",
+                  xs: "1.3rem",
                   sm: "1.4rem",
                   md: "1.2rem",
                   lg: "1.8rem",
                 },
+                letterSpacing: "0.02em",
               }}
             >
-              Say goodbye to the long, anxiety-filled waits for medical
+              {translations["hero.text"]}
+              <br></br>
+              {translations["hero.text2"]}
+              {/* Say goodbye to the long, anxiety-filled waits for medical
               appointments. <br></br>With Gomed, we assure you a confirmed
-              doctor's appointment within a maximum of three days.
+              doctor's appointment within a maximum of three days. */}
             </Typography>
             {/* HERO DESCRIPTION END */}
           </Box>
@@ -122,10 +188,10 @@ export default function Hero() {
             sx={{
               alignSelf: "center",
               position: "absolute",
-              top: "60%",
-              right: { md: "32%", lg: "24.5%", xl: "15%" },
+              top: "70%",
+              right: { sm: "0", md: "33%", lg: "28%", xl: "33%" },
               transform: "translateY(-50%)",
-              "@media screen and (max-width: 899px)": {
+              "@media screen and (max-width: 599px)": {
                 position: "relative",
                 top: "unset",
                 right: "unset",
@@ -136,35 +202,6 @@ export default function Hero() {
             <CTAForm />
           </Box>
           {/* FORM END */}
-
-          {/* HERO IMAGE */}
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: {
-                xs: "48.2%",
-                sm: "-12.5%",
-                md: "-54.5%",
-                lg: "-29.7%",
-                xl: "-32.5%",
-              },
-              right: { xs: "13%", md: "-2.5%", lg: "-13%", xl: "-28%" },
-              maxWidth: {
-                xs: "220px",
-                sm: "220px",
-                md: "290px",
-                lg: "370px",
-                xl: "512px",
-              },
-            }}
-          >
-            <img
-              src="https://res.cloudinary.com/dulasau/image/upload/v1707402156/GOMEDCZ/online-consultation_c7b3lt.png"
-              alt="online-consultation"
-              style={{ width: "100%" }}
-            />
-          </Box>
-          {/* HERO IMAGE END */}
         </Box>
       </Box>
       {/* HERO CONTENT CONTAINER END*/}

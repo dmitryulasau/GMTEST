@@ -91,7 +91,7 @@ export default function Hero() {
         {/* HERO IMAGE END */}
         <Box
           sx={{
-            maxWidth: "96rem",
+            minWidth: { xs: "29rem", sm: "50rem", lg: "96rem" },
             // background: "salmon",
 
             display: "flex",
@@ -188,7 +188,7 @@ export default function Hero() {
             sx={{
               alignSelf: "center",
               position: "absolute",
-              top: "70%",
+              top: "78%",
               right: { sm: "0", md: "33%", lg: "28%", xl: "33%" },
               transform: "translateY(-50%)",
               "@media screen and (max-width: 599px)": {

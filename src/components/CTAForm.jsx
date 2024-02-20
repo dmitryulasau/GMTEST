@@ -269,13 +269,13 @@ export default function CTAForm() {
           background: "var(--blue)",
 
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "space-between",
-          flexDirection: "column",
 
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
-          height: "570px",
+          minHeight: "58rem",
         }}
       >
         <Box
