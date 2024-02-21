@@ -287,6 +287,7 @@ export default function CTAForm() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "space-between",
+          gap: "1rem",
 
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
