@@ -48,6 +48,9 @@ export default function Why() {
             height: { lg: "35vh" },
 
             width: "100%",
+
+            textAlign: "center",
+            padding: "0rem 4rem",
           }}
         >
           <Typography
