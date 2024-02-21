@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   padding: 0;
@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  font-family: "Yaro Rg Thin", sans-serif;
+  font-family: "Montserrat", sans-serif;
 
   line-height: 1;
   overflow-x: hidden;
@@ -60,10 +60,10 @@ a:link {
   --bg-light: #9dd9f4;
   --white: #fff;
   --black: #000;
-  --error-color: #570b7f;
+  --error-color: #e73f46;
 }
 
-@font-face {
+/* @font-face {
   font-family: "Yaro Rg Thin";
   src: url("/fonts/YaroRg-Thin.woff2") format("woff2"),
     url("/fonts/YaroRg-Thin.woff") format("woff"),
@@ -85,4 +85,4 @@ a:link {
     url("/fonts/YaroOp-Thin.woff") format("woff"),
     url("/fonts/YaroOp-Thin.ttf") format("truetype"),
     url("/fonts/YaroOp-Thin.eot") format("eot");
-}
+} */

@@ -34,7 +34,7 @@ const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
-    fontFamily: "Yaro Op Thin",
+    fontFamily: "Montserrat",
     color: "#000",
     fontSize: "1.4rem",
     overflow: "hidden",
@@ -57,7 +57,7 @@ const CssTextField = styled((props) => (
     },
   },
   "& .MuiInputLabel-root": {
-    fontFamily: "Yaro Op Thin",
+    fontFamily: "Montserrat",
     color: "#787878",
     fontSize: "1.4rem",
     "&.Mui-focused": {
@@ -240,7 +240,7 @@ export default function CTAForm() {
         </Box>
         <Typography
           sx={{
-            fontFamily: "Yaro Rg",
+            fontFamily: "Montserrat",
             color: "var(--white)",
             fontSize: { xs: "1.6rem", sm: "1.8rem", md: "2rem" },
             fontWeight: "bold",
@@ -287,7 +287,7 @@ export default function CTAForm() {
           {insuranceProviders.map((insuranceProvider) => (
             <MenuItem
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 letterSpacing: "0.1em",
                 color: "#787878",
               }}
@@ -311,7 +311,7 @@ export default function CTAForm() {
         />
         <Button
           sx={{
-            fontFamily: "Yaro Rg",
+            fontFamily: "Montserrat",
             color: "var(--white)",
             fontSize: "1.6rem",
             fontWeight: "bold",

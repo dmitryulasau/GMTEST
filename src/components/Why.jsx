@@ -52,7 +52,7 @@ export default function Why() {
         >
           <Typography
             sx={{
-              fontFamily: "Yaro Rg",
+              fontFamily: "Montserrat",
               color: "var(--primary-color)",
               fontSize: "2.4rem",
               fontWeight: "bold",
@@ -74,7 +74,7 @@ export default function Why() {
 
           <Typography
             sx={{
-              fontFamily: "Yaro Rg Thin",
+              fontFamily: "Montserrat",
               color: "var(--primary-color)",
               fontSize: "1.6rem",
               marginBottom: "10rem",
@@ -143,7 +143,8 @@ export default function Why() {
             >
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg",
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
                   letterSpacing: "0.02em",
@@ -154,7 +155,8 @@ export default function Why() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg Thin",
+                  fontFamily: "Montserrat",
+
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
                   letterSpacing: "0.02em",
@@ -207,10 +209,11 @@ export default function Why() {
             >
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg",
+                  fontFamily: "Montserrat",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
                   letterSpacing: "0.02em",
+                  fontWeight: "bold",
                 }}
               >
                 {translations["why.reason2"]}
@@ -218,7 +221,7 @@ export default function Why() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg Thin",
+                  fontFamily: "Montserrat",
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
                   letterSpacing: "0.02em",
@@ -271,10 +274,11 @@ export default function Why() {
             >
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg",
+                  fontFamily: "Montserrat",
                   color: "var(--primary-color)",
                   fontSize: "1.8rem",
                   letterSpacing: "0.02em",
+                  fontWeight: "bold",
                 }}
               >
                 {translations["why.reason3"]}
@@ -282,7 +286,7 @@ export default function Why() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "Yaro Rg Thin",
+                  fontFamily: "Montserrat",
                   color: "var(--primary-color)",
                   fontSize: "1.6rem",
                   letterSpacing: "0.02em",

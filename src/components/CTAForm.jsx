@@ -67,7 +67,7 @@ const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
-    fontFamily: "Yaro Op Thin",
+    fontFamily: "Montserrat",
     color: "#000",
     fontSize: "1.4rem",
     overflow: "hidden",
@@ -90,7 +90,7 @@ const CssTextField = styled((props) => (
     },
   },
   "& .MuiInputLabel-root": {
-    fontFamily: "Yaro Op Thin",
+    fontFamily: "Montserrat",
     color: "#787878",
     fontSize: "1.4rem",
     "&.Mui-focused": {
@@ -106,7 +106,7 @@ const CssTextField = styled((props) => (
     color: "var(--error-color)", // Change this to the color you desire
   },
   "& .MuiInputLabel-root.Mui-error": {
-    color: "var(--error-color)",
+    color: "#656565",
   },
   "& .MuiFilledInput-root.Mui-error": {
     borderColor: "var(--error-color)",
@@ -176,18 +176,33 @@ export default function CTAForm() {
 
   // GET SPECIALISTS
   useEffect(() => {
+    let specialistsEndpoint = ""; // Initialize endpoint URL
+
+    // Determine which endpoint to use based on the selected language
+    switch (language) {
+      case "cz":
+        specialistsEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_cz";
+        break;
+      case "ru":
+        specialistsEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng";
+        break;
+      default:
+        specialistsEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng";
+    }
+
+    // Fetch specialists based on the determined endpoint
     axios
-      .get(
-        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng"
-      )
+      .get(specialistsEndpoint)
       .then((response) => {
-        // console.log(response.data);
         setSpecialists(response.data);
       })
       .catch((error) => {
         console.error("Error fetching specialists:", error);
       });
-  }, []);
+  }, [language]); // Make sure to include language as a dependency
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -261,7 +276,7 @@ export default function CTAForm() {
   };
 
   return (
-    <Box sx={{ maxWidth: "25rem" }}>
+    <Box sx={{ maxWidth: "29rem" }}>
       <div id="CTA" style={{}}></div>
       <Paper
         elevation={20}
@@ -291,7 +306,7 @@ export default function CTAForm() {
         </Box>
         <Typography
           sx={{
-            fontFamily: "Yaro Rg",
+            fontFamily: "Montserrat",
             color: "var(--white)",
             fontSize: { xs: "1.6rem", sm: "1.8rem", md: "2rem" },
             fontWeight: "bold",
@@ -346,7 +361,7 @@ export default function CTAForm() {
           {insuranceProviders.map((insuranceProvider, index) => (
             <MenuItem
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 letterSpacing: "0.1em",
                 color: "#787878",
               }}
@@ -388,7 +403,7 @@ export default function CTAForm() {
               key={index}
               value={specialist}
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 letterSpacing: "0.1em",
                 color: "#787878",
               }}
@@ -415,13 +430,13 @@ export default function CTAForm() {
         </CssTextField>
         <Button
           sx={{
-            fontFamily: "Yaro Rg",
+            fontFamily: "Montserrat",
             color: "var(--white)",
             fontSize: "1.6rem",
             fontWeight: "bold",
             textTransform: "none",
             borderRadius: "1.2rem",
-            padding: "0.3rem 1.6rem",
+            padding: "0.3rem 4rem",
 
             background: "var(--secondary-color)",
             "&:hover": {
@@ -454,7 +469,7 @@ export default function CTAForm() {
           <Typography
             variant="body1"
             sx={{
-              fontFamily: "Yaro Rg",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.4rem",
             }}
@@ -493,7 +508,7 @@ export default function CTAForm() {
                 variant="h6"
                 component="h2"
                 sx={{
-                  fontFamily: "Yaro Op Thin",
+                  fontFamily: "Montserrat",
                   fontSize: "2rem",
                   fontWeight: "bold",
                 }}
@@ -502,7 +517,7 @@ export default function CTAForm() {
               </Typography>
               <Typography
                 id="modal-modal-description"
-                sx={{ mt: 2, fontFamily: "Yaro Op Thin", fontSize: "1.6rem" }}
+                sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
               >
                 Privacy Policy data processing involves the collection, storage,
                 and utilization of personal information in accordance with

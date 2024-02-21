@@ -87,7 +87,7 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.8rem",
               letterSpacing: "0.02em",
@@ -110,7 +110,7 @@ export default function Footer() {
                 variant="h6"
                 component="h2"
                 sx={{
-                  fontFamily: "Yaro Op Thin",
+                  fontFamily: "Montserrat",
                   fontSize: "2rem",
                   fontWeight: "bold",
                 }}
@@ -119,7 +119,7 @@ export default function Footer() {
               </Typography>
               <Typography
                 id="modal-modal-description"
-                sx={{ mt: 2, fontFamily: "Yaro Op Thin", fontSize: "1.6rem" }}
+                sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
               >
                 Privacy Policy data processing involves the collection, storage,
                 and utilization of personal information in accordance with
@@ -157,7 +157,7 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.2rem",
 
@@ -168,7 +168,7 @@ export default function Footer() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.2rem",
               letterSpacing: "0.02em",
@@ -178,7 +178,7 @@ export default function Footer() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.2rem",
               letterSpacing: "0.02em",
@@ -188,7 +188,7 @@ export default function Footer() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.2rem",
 
@@ -199,7 +199,7 @@ export default function Footer() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Op Thin",
+              fontFamily: "Montserrat",
               color: "var(--white)",
               fontSize: "1.2rem",
 
@@ -213,7 +213,7 @@ export default function Footer() {
         <Typography
           sx={{
             marginTop: "1rem",
-            fontFamily: "Yaro Op Thin",
+            fontFamily: "Montserrat",
             color: "#ABABAB",
             fontSize: "1rem",
             textAlign: "center",

@@ -74,7 +74,7 @@ export default function Hero() {
               sm: "22%",
               md: "32%",
               lg: "27.5%",
-              xl: "33%",
+              xl: "30%",
             },
           }}
         >
@@ -119,7 +119,7 @@ export default function Hero() {
 
             <Typography
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 color: "var(--white)",
                 fontSize: {
                   xs: "1.4rem",
@@ -161,7 +161,7 @@ export default function Hero() {
             {/* HERO DESCRIPTION */}
             <Typography
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 color: "var(--white)",
                 fontSize: {
                   xs: "1.3rem",
@@ -188,8 +188,8 @@ export default function Hero() {
             sx={{
               alignSelf: "center",
               position: "absolute",
-              top: "78%",
-              right: { sm: "0", md: "33%", lg: "28%", xl: "33%" },
+              top: { sm: "70%", md: "70%", lg: "78%" },
+              right: { sm: "0", md: "33%", lg: "28%", xl: "30%" },
               transform: "translateY(-50%)",
               "@media screen and (max-width: 599px)": {
                 position: "relative",

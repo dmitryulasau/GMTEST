@@ -37,7 +37,7 @@ export default function Privacy() {
           variant="h6"
           component="h2"
           sx={{
-            fontFamily: "Yaro Op Thin",
+            fontFamily: "Montserrat",
             fontSize: "2rem",
             fontWeight: "bold",
           }}
@@ -46,7 +46,7 @@ export default function Privacy() {
         </Typography>
         <Typography
           id="modal-modal-description"
-          sx={{ mt: 2, fontFamily: "Yaro Op Thin", fontSize: "1.6rem" }}
+          sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
         >
           Privacy Policy data processing involves the collection, storage, and
           utilization of personal information in accordance with applicable laws

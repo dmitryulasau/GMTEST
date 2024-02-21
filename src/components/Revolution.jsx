@@ -50,7 +50,7 @@ export default function Revolution() {
         >
           <Typography
             sx={{
-              fontFamily: "Yaro Rg",
+              fontFamily: "Montserrat",
               color: "var(--secondary-color)",
               fontSize: "1.6rem",
             }}
@@ -60,7 +60,7 @@ export default function Revolution() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Rg",
+              fontFamily: "Montserrat",
               color: "var(--primary-color)",
               fontSize: "3.6rem",
               fontWeight: "bold",
@@ -73,7 +73,7 @@ export default function Revolution() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Yaro Rg Thin",
+              fontFamily: "Montserrat",
               color: "var(--primary-color)",
               fontSize: "1.6rem",
               letterSpacing: "0.02em",

@@ -43,7 +43,7 @@ export default function Join() {
     >
       <Typography
         sx={{
-          fontFamily: "Yaro Rg",
+          fontFamily: "Montserrat",
           color: "var(--primary-color)",
           fontSize: "2.4rem",
           fontWeight: "bold",
@@ -56,7 +56,7 @@ export default function Join() {
       </Typography>
       <Typography
         sx={{
-          fontFamily: "Yaro Rg",
+          fontFamily: "Montserrat",
           color: "var(--secondary-color)",
           fontSize: "2.4rem",
           fontWeight: "bold",

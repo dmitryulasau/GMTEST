@@ -119,7 +119,7 @@ export default function Hero() {
 
             <Typography
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserratg",
                 color: "var(--white)",
                 fontSize: {
                   xs: "1.4rem",
@@ -161,7 +161,7 @@ export default function Hero() {
             {/* HERO DESCRIPTION */}
             <Typography
               sx={{
-                fontFamily: "Yaro Rg",
+                fontFamily: "Montserrat",
                 color: "var(--white)",
                 fontSize: {
                   xs: "1.3rem",

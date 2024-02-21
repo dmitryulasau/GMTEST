@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,9 +22,7 @@ import ruTranslations from "../locales/ru.json";
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [avatarSrc, setAvatarSrc] = React.useState(
-    "https://res.cloudinary.com/dulasau/image/upload/v1708309694/languages_nzwaaw.png"
-  );
+  const [avatarSrc, setAvatarSrc] = React.useState(null);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
@@ -75,6 +73,26 @@ function ResponsiveAppBar() {
       handleCloseNavMenu();
     }
   };
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.split("-")[0]; // Extract the language code
+    switch (browserLanguage) {
+      case "cz":
+        setAvatarSrc(
+          "https://res.cloudinary.com/dulasau/image/upload/v1708309655/cz_tvyswn.png"
+        );
+        break;
+      case "ru":
+        setAvatarSrc(
+          "https://res.cloudinary.com/dulasau/image/upload/v1708309655/ru_yimglg.png"
+        );
+        break;
+      default:
+        setAvatarSrc(
+          "https://res.cloudinary.com/dulasau/image/upload/v1708309482/en_wioswp.png"
+        );
+    }
+  }, []);
 
   // Handle Language Change
   const handleLanguageChange = (newLanguage) => {
@@ -168,7 +186,7 @@ function ResponsiveAppBar() {
                     sx={{
                       color: "var(--black)",
                       fontSize: "2rem",
-                      fontFamily: "Yaro Rg Thin",
+                      fontFamily: "Montserrat",
                       letterSpacing: "0.02em",
                     }}
                   >
@@ -216,7 +234,7 @@ function ResponsiveAppBar() {
                 sx={{
                   my: 2,
                   fontSize: "1.8rem",
-                  fontFamily: "Yaro Rg Thin",
+                  fontFamily: "Montserrat",
                   textTransform: "none",
                   color: "var(--black)",
                   display: "block",

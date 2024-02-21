@@ -41,7 +41,7 @@ export default function ContactUs() {
       </Box>
       <Typography
         sx={{
-          fontFamily: "Yaro Rg Thin",
+          fontFamily: "Montserrat",
           color: "var(--primary-color)",
           fontSize: "2.4rem",
           padding: "1rem",
@@ -65,7 +65,7 @@ export default function ContactUs() {
       <Typography
         sx={{
           marginTop: "3rem",
-          fontFamily: "Yaro Rg Thin",
+          fontFamily: "Montserrat",
           color: "var(--primary-color)",
           fontSize: "1.6rem",
           padding: "1rem",
