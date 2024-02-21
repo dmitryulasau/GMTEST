@@ -29,40 +29,6 @@ import czTranslations from "../locales/cz.json";
 import ruTranslations from "../locales/ru.json";
 import { useContext } from "react";
 
-const schema = Joi.object({
-  email: Joi.string()
-    .email({ tlds: { allow: false } })
-    .required()
-    .messages({
-      "string.empty": "Email is required",
-      "string.email": "Please enter a valid email address",
-      "any.required": "Email is required",
-    }),
-  phoneNumber: Joi.string()
-    .pattern(new RegExp("^\\d{3} \\d{3} \\d{3}$"))
-    .required()
-    .messages({
-      "string.empty": "Phone number is required",
-      "string.pattern.base": "Phone should be 9 digits",
-      "any.required": "Phone number is required",
-    }),
-  insuranceProvider: Joi.string().required().messages({
-    "string.empty": "Please choose insurance",
-    "any.required": "Please select your medical insurance",
-  }),
-  specialists: Joi.array()
-    .min(1) // At least one specialist must be selected
-    .items(Joi.string()) // Each item in the array must be a string
-    .required()
-    .messages({
-      "array.min": "Please choose specialist",
-      "array.base": "Please choose specialist",
-      "array.required": "Please choose specialist",
-      "any.required": "Please choose specialist",
-    }),
-  language: Joi.string().required(),
-});
-
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
@@ -274,6 +240,74 @@ export default function CTAForm() {
         });
     }
   };
+
+  useEffect(() => {
+    setFormData({
+      email: "",
+      phoneNumber: "",
+      insuranceProvider: "",
+      specialists: [],
+      language: navigator.language || navigator.userLanguage,
+    });
+    setErrors({});
+  }, [language]);
+
+  const errorMessages = {
+    en: {
+      emailEmpty: "Email is required",
+      email: "Please enter a valid email address",
+      phoneNumberEmpty: "Phone number is required",
+      phoneNumber: "Phone should be 9 digits",
+      insuranceProvider: "Please choose your medical insurance",
+      specialists: "Please choose specialists",
+    },
+    cz: {
+      emailEmpty: "E-mail je povinný",
+      email: "Prosím zadejte platnou e-mailovou adresu",
+      phoneNumberEmpty: "Telefonní číslo je povinné",
+      phoneNumber: "Telefonní číslo by mělo mít 9 číslic",
+      insuranceProvider: "Prosím vyberte svoje pojištění",
+      specialists: "Prosím vyberte specialisty",
+    },
+    ru: {
+      emailEmpty: "Требуется электронная почта",
+      email: "Пожалуйста, введите действительный адрес электронной почты",
+      phoneNumberEmpty: "Требуется номер телефона",
+      phoneNumber: "Номер телефона должен содержать 9 цифр",
+      insuranceProvider: "Пожалуйста, выберите свою медицинскую страховку",
+      specialists: "Пожалуйста, выберите специалистов",
+    },
+  };
+
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.empty": errorMessages[language].emailEmpty,
+        "string.email": errorMessages[language].email,
+        "any.required": errorMessages[language].emailEmpty,
+      }),
+    phoneNumber: Joi.string()
+      .pattern(new RegExp("^\\d{3} \\d{3} \\d{3}$"))
+      .required()
+      .messages({
+        "string.empty": errorMessages[language].phoneNumberEmpty,
+        "string.pattern.base": errorMessages[language].phoneNumber,
+        "any.required": errorMessages[language].phoneNumberEmpty,
+      }),
+    insuranceProvider: Joi.string().required().messages({
+      "string.empty": errorMessages[language].insuranceProvider,
+      "any.required": errorMessages[language].insuranceProvider,
+    }),
+    specialists: Joi.array().min(1).items(Joi.string()).required().messages({
+      "array.min": errorMessages[language].specialists,
+      "array.base": errorMessages[language].specialists,
+      "array.required": errorMessages[language].specialists,
+      "any.required": errorMessages[language].specialists,
+    }),
+    language: Joi.string().required(),
+  });
 
   return (
     <Box sx={{ maxWidth: "29rem" }}>

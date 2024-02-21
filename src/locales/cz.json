@@ -40,5 +40,15 @@
 
   "footer.privacyPolicy": "Zásady ochrany osobních údajů",
   "footer.stickers": "Samolepky navrhl kerismaker z Flaticon",
-  "footer.language": "Jazyk"
+  "footer.language": "Jazyk",
+
+  "validation.email.required": "E-mail je povinný",
+  "validation.email.invalid": "Prosím zadejte platnou e-mailovou adresu",
+
+  "validation.phone.required": "Telefonní číslo je povinné",
+  "validation.phone.invalid": "Telefonní číslo by mělo mít 9 číslic",
+
+  "validation.insurance.required": "Prosím vyberte svoje pojištění",
+
+  "validation.specialist.required": "Prosím vyberte specialisty"
 }

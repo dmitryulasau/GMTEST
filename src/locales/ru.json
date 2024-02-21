@@ -12,7 +12,7 @@
   "ctaform.email": "Электронная почта",
   "ctaform.phone": "Номер телефона",
   "ctaform.insurance": "Медицинская страховка",
-  "ctaform.specialist": "Выберите специалиста",
+  "ctaform.specialist": "Выберите специалистов",
   "ctaform.submit": "Присоединиться к списку ожидания",
   "ctaform.privacy": "Я прочитал и согласен с ",
   "ctaform.privacy2": "политикой конфиденциальности",
@@ -39,5 +39,15 @@
 
   "footer.privacyPolicy": "Политика конфиденциальности",
   "footer.stickers": "Наклейки разработаны kerismaker из Flaticon",
-  "footer.language": "Язык"
+  "footer.language": "Язык",
+
+  "validation.email.required": "Требуется электронная почта",
+  "validation.email.invalid": "Пожалуйста, введите действительный адрес электронной почты",
+
+  "validation.phone.required": "Требуется номер телефона",
+  "validation.phone.invalid": "Номер телефона должен содержать 9 цифр",
+
+  "validation.insurance.required": "Пожалуйста, выберите свою медицинскую страховку",
+
+  "validation.specialist.required": "Пожалуйста, выберите специалистов"
 }

@@ -39,5 +39,15 @@
 
   "footer.privacyPolicy": "Privacy Policy",
   "footer.stickers": "Stickers designed by kerismaker from Flaticon",
-  "footer.language": "Language"
+  "footer.language": "Language",
+
+  "validation.email.required": "Email is required",
+  "validation.email.invalid": "Please enter a valid email address",
+
+  "validation.phone.required": "Phone number is required",
+  "validation.phone.invalid": "Phone should be 9 digits",
+
+  "validation.insurance.required": "Please choose your medical insurance",
+
+  "validation.specialist.required": "Please choose specialists"
 }

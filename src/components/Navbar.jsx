@@ -60,6 +60,7 @@ function ResponsiveAppBar() {
 
   const handleScroll = (page) => {
     const targetIds = {
+      [translations["navbar.home"]]: "home",
       [translations["navbar.why"]]: "why",
       [translations["navbar.contact"]]: "contact",
       [translations["navbar.services"]]: "revolution",
