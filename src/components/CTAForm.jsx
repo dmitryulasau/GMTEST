@@ -199,46 +199,72 @@ export default function CTAForm() {
       });
     }
   };
-
   const handleSubmit = () => {
     const { error } = schema.validate(formData, { abortEarly: false });
+
+    let hasErrors = false;
+
+    // Check if the privacy policy checkbox is not checked
+    if (!isChecked) {
+      // If privacy policy checkbox is not checked, display a toast message
+      toast.error("Please agree to the privacy policy", {
+        id: "privacy-policy-toast",
+      });
+      hasErrors = true;
+    }
+
+    // Clear any previous validation errors
+    setErrors({});
+
     if (error) {
       const validationErrors = {};
       error.details.forEach((detail) => {
         validationErrors[detail.context.key] = detail.message;
       });
       setErrors(validationErrors);
-      // console.log("STILL ERRORS", error); // This line indicates errors are still present
-    } else {
-      // console.log(formData);
-      axios
-        .post(
-          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
-          formData
-        )
-        .then((response) => {
-          console.log("Form submitted successfully:", response.data);
-          setFormData({
-            email: "",
-            phoneNumber: "",
-            insuranceProvider: "",
-            specialists: [],
-            language: "",
-          });
-          setErrors({});
-          toast.success("Thank you for joining our list!", {
-            id: "join-list-toast",
-          });
-        })
-        .catch((error) => {
-          // Handle errors
-          console.error("Error submitting form:", error);
-          // Optionally, you can show an error message to the user
-          toast.error("Something went wrong", {
-            id: "error-toast",
-          });
-        });
+      hasErrors = true;
     }
+
+    // If there are any errors, exit the function early
+    if (hasErrors) return;
+
+    const payload = {
+      phoneNumber: formData.phoneNumber,
+      insuranceProvider: formData.insuranceProvider,
+      email: formData.email,
+      language: formData.language,
+      specialists: formData.specialists,
+      isPrivacyPolicyConsentGiven: isChecked,
+    };
+
+    axios
+      .post(
+        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
+        payload
+      )
+      .then((response) => {
+        console.log("Form submitted successfully:", response.data);
+        setFormData({
+          email: "",
+          phoneNumber: "",
+          insuranceProvider: "",
+          specialists: [],
+          language: "",
+        });
+        setErrors({});
+        toast.success("Thank you for joining our list!", {
+          id: "join-list-toast",
+        });
+      })
+      .catch((error) => {
+        console.log(formData);
+        // Handle errors
+        console.error("Error submitting form:", error);
+        // Optionally, you can show an error message to the user
+        toast.error("Something went wrong", {
+          id: "error-toast",
+        });
+      });
   };
 
   useEffect(() => {
