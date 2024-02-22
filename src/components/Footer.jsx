@@ -184,7 +184,7 @@ export default function Footer() {
               letterSpacing: "0.02em",
             }}
           >
-            Legerova 356/48
+            náměstí Přátelství 1518/3 Hostivař
           </Typography>
           <Typography
             sx={{
@@ -195,7 +195,7 @@ export default function Footer() {
               letterSpacing: "0.02em",
             }}
           >
-            12000 Praha 2
+            102 00 Praha 10
           </Typography>
           <Typography
             sx={{
