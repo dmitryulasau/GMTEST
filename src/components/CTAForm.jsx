@@ -158,7 +158,7 @@ export default function CTAForm() {
         break;
       case "ru":
         specialistsEndpoint =
-          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng";
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_rus";
         break;
       default:
         specialistsEndpoint =
