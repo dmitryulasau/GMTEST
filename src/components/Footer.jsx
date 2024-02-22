@@ -92,6 +92,9 @@ export default function Footer() {
               fontSize: "1.8rem",
               letterSpacing: "0.02em",
               cursor: "pointer",
+              "&:hover": {
+                textDecoration: "underline",
+              },
             }}
             onClick={handleOpen}
           >
