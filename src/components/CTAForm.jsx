@@ -95,6 +95,12 @@ const style = {
   p: 4,
 };
 
+const otherTranslations = {
+  en: "Other",
+  ru: "Другая",
+  cz: "Další",
+};
+
 export default function CTAForm() {
   const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
   const translations =
@@ -419,7 +425,7 @@ export default function CTAForm() {
           helperText={errors.insuranceProvider}
           sx={{ width: "100%" }}
         >
-          {insuranceProviders.map((insuranceProvider, index) => (
+          {[...insuranceProviders, "Other"].map((insuranceProvider, index) => (
             <MenuItem
               sx={{
                 fontFamily: "Montserrat",
@@ -429,7 +435,9 @@ export default function CTAForm() {
               key={index}
               value={insuranceProvider}
             >
-              {insuranceProvider}
+              {insuranceProvider === "Other"
+                ? otherTranslations[language]
+                : insuranceProvider}
             </MenuItem>
           ))}
         </CssTextField>
