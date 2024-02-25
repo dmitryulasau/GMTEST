@@ -122,6 +122,7 @@ function ResponsiveAppBar() {
       sx={{
         background: "var(--white)",
         width: "100%",
+        zIndex: 1000,
       }}
     >
       <Container sx={{}}>
