@@ -343,6 +343,37 @@ export default function CTAForm() {
     language: Joi.string().required(),
   });
 
+  const [privacy, setPrivacy] = useState([]);
+
+  useEffect(() => {
+    let privacysEndpoint = ""; // Initialize endpoint URL
+
+    // Determine which endpoint to use based on the selected language
+    switch (language) {
+      case "cz":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/cz";
+        break;
+      case "ru":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/rus";
+        break;
+      default:
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/eng";
+    }
+
+    // Fetch specialists based on the determined endpoint
+    axios
+      .get(privacysEndpoint)
+      .then((response) => {
+        setPrivacy(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching privacy:", error);
+      });
+  }, [language]);
+
   return (
     <Box sx={{ maxWidth: "29rem" }}>
       <div id="CTA" style={{}}></div>
@@ -573,8 +604,8 @@ export default function CTAForm() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
-              <Typography
+            <Box sx={style} style={{ maxHeight: "80vh", overflowY: "auto" }}>
+              {/* <Typography
                 id="modal-modal-title"
                 variant="h6"
                 component="h2"
@@ -585,16 +616,13 @@ export default function CTAForm() {
                 }}
               >
                 Privacy Policy Gomed
-              </Typography>
+              </Typography> */}
+              {/* Render privacy policy HTML content directly inside Typography */}
               <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
-              >
-                Privacy Policy data processing involves the collection, storage,
-                and utilization of personal information in accordance with
-                applicable laws and regulations to ensure transparency,
-                security, and user consent.
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: privacy }}
+              />
             </Box>
           </Modal>
         </Box>

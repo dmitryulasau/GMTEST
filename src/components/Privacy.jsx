@@ -4,6 +4,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
+import LanguageContext from "../contexts/LanguageContext"; // Import Language Context
+import enTranslations from "../locales/en.json";
+import czTranslations from "../locales/cz.json";
+import ruTranslations from "../locales/ru.json";
+import { useContext } from "react";
+
 // MODAL STYLE
 const style = {
   position: "absolute",
@@ -23,6 +29,46 @@ export default function Privacy() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [privacy, setPrivacy] = useState([]);
+
+  console.log(privacy);
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
+  useEffect(() => {
+    let privacysEndpoint = ""; // Initialize endpoint URL
+
+    // Determine which endpoint to use based on the selected language
+    switch (language) {
+      case "cz":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/cz";
+        break;
+      case "ru":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/rus";
+        break;
+      default:
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/eng";
+    }
+
+    // Fetch specialists based on the determined endpoint
+    axios
+      .get(privacysEndpoint)
+      .then((response) => {
+        setPrivacy(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching privacy:", error);
+      });
+  }, [language]);
 
   return (
     <Modal
@@ -48,9 +94,7 @@ export default function Privacy() {
           id="modal-modal-description"
           sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
         >
-          Privacy Policy data processing involves the collection, storage, and
-          utilization of personal information in accordance with applicable laws
-          and regulations to ensure transparency, security, and user consent.
+          {privacy}
         </Typography>
       </Box>
     </Modal>

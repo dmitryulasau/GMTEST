@@ -31,7 +31,7 @@ function App() {
 
         <Hero />
         <div style={{ height: "6rem" }}></div>
-        <div id="why" style={{ height: "4rem" }}></div>
+        <div id="why" style={{ height: "8rem" }}></div>
         <Why />
         <div id="revolution" style={{ height: "8rem" }}></div>
         <Revolution />

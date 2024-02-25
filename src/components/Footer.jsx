@@ -10,7 +10,8 @@ import LanguageContext from "../contexts/LanguageContext"; // Import Language Co
 import enTranslations from "../locales/en.json";
 import czTranslations from "../locales/cz.json";
 import ruTranslations from "../locales/ru.json";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 // MODAL STYLE
 const style = {
@@ -39,6 +40,37 @@ export default function Footer() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [privacy, setPrivacy] = useState([]);
+
+  useEffect(() => {
+    let privacysEndpoint = ""; // Initialize endpoint URL
+
+    // Determine which endpoint to use based on the selected language
+    switch (language) {
+      case "cz":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/cz";
+        break;
+      case "ru":
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/rus";
+        break;
+      default:
+        privacysEndpoint =
+          "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/eng";
+    }
+
+    // Fetch specialists based on the determined endpoint
+    axios
+      .get(privacysEndpoint)
+      .then((response) => {
+        setPrivacy(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching privacy:", error);
+      });
+  }, [language]);
 
   return (
     <Box
@@ -107,8 +139,8 @@ export default function Footer() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
-              <Typography
+            <Box sx={style} style={{ maxHeight: "80vh", overflowY: "auto" }}>
+              {/* <Typography
                 id="modal-modal-title"
                 variant="h6"
                 component="h2"
@@ -119,16 +151,13 @@ export default function Footer() {
                 }}
               >
                 Privacy Policy Gomed
-              </Typography>
+              </Typography> */}
+              {/* Render privacy policy HTML content directly inside Typography */}
               <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
-              >
-                Privacy Policy data processing involves the collection, storage,
-                and utilization of personal information in accordance with
-                applicable laws and regulations to ensure transparency,
-                security, and user consent.
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: privacy }}
+              />
             </Box>
           </Modal>
         </Box>
