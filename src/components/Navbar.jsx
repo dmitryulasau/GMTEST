@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -23,6 +23,8 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [avatarSrc, setAvatarSrc] = React.useState(null);
+
+  const appBarRef = useRef(null); // Reference to the AppBar component
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
@@ -115,15 +117,36 @@ function ResponsiveAppBar() {
     handleCloseUserMenu();
   };
 
+  // Function to handle resize events and adjust the app bar position
+  const handleResize = () => {
+    if (appBarRef.current) {
+      appBarRef.current.style.bottom = `${
+        window.innerHeight - appBarRef.current.offsetTop
+      }px`;
+    }
+  };
+
+  // Attach resize event listener when component mounts
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Handle initial positioning
+  useEffect(() => {
+    handleResize();
+  }, []);
+
   // console.log(translations);
   return (
     <>
       <AppBar
-        position="fixed"
+        ref={appBarRef}
         sx={{
           background: "var(--white)",
           width: "100%",
           zIndex: 1000,
+          position: "sticky",
         }}
       >
         <Container sx={{}}>
@@ -285,7 +308,6 @@ function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box sx={{ paddingBottom: "56px" }}>{/* Your content here */}</Box>
     </>
   );
 }
