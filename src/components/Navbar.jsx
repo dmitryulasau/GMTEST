@@ -146,7 +146,7 @@ function ResponsiveAppBar() {
           background: "var(--white)",
           width: "100%",
           zIndex: 1000,
-          position: "fixed",
+          position: "sticky",
         }}
       >
         <Container sx={{}}>
@@ -308,7 +308,6 @@ function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box sx={{ height: "56px" }}></Box>
     </>
   );
 }
