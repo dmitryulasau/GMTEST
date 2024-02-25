@@ -117,171 +117,176 @@ function ResponsiveAppBar() {
 
   // console.log(translations);
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        background: "var(--white)",
-        width: "100%",
-        zIndex: 1000,
-      }}
-    >
-      <Container sx={{}}>
-        <Toolbar disableGutters>
-          {/* DESKTOP LOGO */}
-          <Box
-            component="a"
-            href="" //TODO
-            sx={{
-              flex: "0 0 30%",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-            }}
-          >
-            <img
-              src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
-              alt="Gomed logo"
-              style={{ maxWidth: "109px" }}
-            />
-          </Box>
-          {/* DESKTOP LOGO END*/}
-
-          {/* MOBILE MENU */}
-          <Box
-            sx={{
-              display: { xs: "flex", md: "none" },
-            }}
-          >
-            <IconButton
-              size="large"
-              aria-label="menu button"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon style={{ color: "var(--black)", fontSize: "2.2rem" }} />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+    <>
+      <AppBar
+        position="fixed"
+        sx={{
+          background: "var(--white)",
+          width: "100%",
+          zIndex: 1000,
+        }}
+      >
+        <Container sx={{}}>
+          <Toolbar disableGutters>
+            {/* DESKTOP LOGO */}
+            <Box
+              component="a"
+              href="" //TODO
               sx={{
-                display: { xs: "block", md: "none" },
+                flex: "0 0 30%",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              <img
+                src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
+                alt="Gomed logo"
+                style={{ maxWidth: "109px" }}
+              />
+            </Box>
+            {/* DESKTOP LOGO END*/}
+
+            {/* MOBILE MENU */}
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+              }}
+            >
+              <IconButton
+                size="large"
+                aria-label="menu button"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon
+                  style={{ color: "var(--black)", fontSize: "2.2rem" }}
+                />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={() => handleScroll(page)}>
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        color: "var(--black)",
+                        fontSize: "2rem",
+                        fontFamily: "Montserrat",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            {/* MOBILE MENU END */}
+
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="" //TODO
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              <img
+                src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
+                alt="Gomed logo"
+                style={{ maxWidth: "109px" }}
+              />
+            </Typography>
+
+            {/* DESKTOP MENU */}
+            <Box
+              sx={{
+                flexGrow: 1,
+
+                display: { xs: "none", md: "flex" },
+                justifyContent: "space-between",
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleScroll(page)}>
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      color: "var(--black)",
-                      fontSize: "2rem",
-                      fontFamily: "Montserrat",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    {page}
-                  </Typography>
-                </MenuItem>
+                <Button
+                  key={page}
+                  onClick={() => handleScroll(page)}
+                  sx={{
+                    my: 2,
+                    fontSize: "1.8rem",
+                    fontFamily: "Montserrat",
+                    textTransform: "none",
+                    color: "var(--black)",
+                    display: "block",
+                  }}
+                >
+                  {page}
+                </Button>
               ))}
-            </Menu>
-          </Box>
-          {/* MOBILE MENU END */}
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="" //TODO
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <img
-              src="https://res.cloudinary.com/dulasau/image/upload/v1707398536/GOMEDCZ/July_Gomed_color_kzhhzr.png"
-              alt="Gomed logo"
-              style={{ maxWidth: "109px" }}
-            />
-          </Typography>
-
-          {/* DESKTOP MENU */}
-          <Box
-            sx={{
-              flexGrow: 1,
-
-              display: { xs: "none", md: "flex" },
-              justifyContent: "space-between",
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => handleScroll(page)}
-                sx={{
-                  my: 2,
-                  fontSize: "1.8rem",
-                  fontFamily: "Montserrat",
-                  textTransform: "none",
-                  color: "var(--black)",
-                  display: "block",
+            </Box>
+            {/* DESKTOP MENU END */}
+            {/* Language Selector */}
+            <Box sx={{ flexGrow: 0, marginLeft: "4rem" }}>
+              <Tooltip title="Language">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="language" src={avatarSrc} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
                 }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          {/* DESKTOP MENU END */}
-          {/* Language Selector */}
-          <Box sx={{ flexGrow: 0, marginLeft: "4rem" }}>
-            <Tooltip title="Language">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="language" src={avatarSrc} />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                {" "}
-                <Button onClick={() => handleLanguageChange("en")}>EN</Button>
-                <Button onClick={() => handleLanguageChange("cz")}>CZ</Button>
-                <Button onClick={() => handleLanguageChange("ru")}>RU</Button>
-              </Box>
-            </Menu>
-          </Box>
-          {/* Language Selector End */}
-        </Toolbar>
-      </Container>
-    </AppBar>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  {" "}
+                  <Button onClick={() => handleLanguageChange("en")}>EN</Button>
+                  <Button onClick={() => handleLanguageChange("cz")}>CZ</Button>
+                  <Button onClick={() => handleLanguageChange("ru")}>RU</Button>
+                </Box>
+              </Menu>
+            </Box>
+            {/* Language Selector End */}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Box sx={{ paddingBottom: "56px" }}>{/* Your content here */}</Box>
+    </>
   );
 }
 export default ResponsiveAppBar;
