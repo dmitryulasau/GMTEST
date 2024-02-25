@@ -41,6 +41,7 @@ export default function Hero() {
 
         padding: "4rem",
 
+        marginTop: "5rem",
         marginBottom: { xs: "2rem", sm: "4rem" },
 
         position: "relative",
