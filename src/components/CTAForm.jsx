@@ -178,6 +178,7 @@ export default function CTAForm() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     let formattedValue = value;
 
     if (name === "specialists") {
@@ -189,11 +190,11 @@ export default function CTAForm() {
       });
     } else if (name === "phoneNumber") {
       formattedValue = formattedValue.replace(/\D/g, "");
-      formattedValue = formattedValue.substring(0, 9); // Limit to 9 characters (assuming the format is '111 111 111')
+      formattedValue = formattedValue.substring(0, 15); // Limit to 15 characters (excluding the plus sign)
       formattedValue = formattedValue.replace(
-        /(\d{3})(\d{3})(\d{3})/,
-        "$1 $2 $3"
-      ); // Add spaces
+        /^(\d{1,3})(\d{0,4})(\d{0,4})(\d{0,4})$/,
+        "+$1$2$3$4"
+      ); // Format phone number as +123456789
       setFormData({
         ...formData,
         [name]: formattedValue,
@@ -205,6 +206,7 @@ export default function CTAForm() {
       });
     }
   };
+
   const handleSubmit = () => {
     const { error } = schema.validate(formData, { abortEarly: false });
 
@@ -289,7 +291,7 @@ export default function CTAForm() {
       emailEmpty: "Email is required",
       email: "Please enter a valid email address",
       phoneNumberEmpty: "Phone number is required",
-      phoneNumber: "Phone should be 9 digits",
+      phoneNumber: "Phone number with country code",
       insuranceProvider: "Please choose your medical insurance",
       specialists: "Please choose specialists",
     },
@@ -297,7 +299,7 @@ export default function CTAForm() {
       emailEmpty: "E-mail je povinný",
       email: "Prosím zadejte platnou e-mailovou adresu",
       phoneNumberEmpty: "Telefonní číslo je povinné",
-      phoneNumber: "Telefonní číslo by mělo mít 9 číslic",
+      phoneNumber: "Telefonní číslo s kódem země",
       insuranceProvider: "Prosím vyberte svoje pojištění",
       specialists: "Prosím vyberte specialisty",
     },
@@ -305,7 +307,7 @@ export default function CTAForm() {
       emailEmpty: "Требуется электронная почта",
       email: "Пожалуйста, введите действительный адрес электронной почты",
       phoneNumberEmpty: "Требуется номер телефона",
-      phoneNumber: "Номер телефона должен содержать 9 цифр",
+      phoneNumber: "Номер телефона с кодом страны",
       insuranceProvider: "Пожалуйста, выберите свою медицинскую страховку",
       specialists: "Пожалуйста, выберите специалистов",
     },
@@ -321,7 +323,7 @@ export default function CTAForm() {
         "any.required": errorMessages[language].emailEmpty,
       }),
     phoneNumber: Joi.string()
-      .pattern(new RegExp("^\\d{3} \\d{3} \\d{3}$"))
+      .pattern(new RegExp("^\\+\\d{7,15}$"))
       .required()
       .messages({
         "string.empty": errorMessages[language].phoneNumberEmpty,
