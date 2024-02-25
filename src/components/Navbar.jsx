@@ -118,7 +118,7 @@ function ResponsiveAppBar() {
   // console.log(translations);
   return (
     <AppBar
-      position="sticky"
+      position="fixed"
       sx={{
         background: "var(--white)",
         width: "100%",
