@@ -128,8 +128,18 @@ export default function CTAForm() {
   });
   const [errors, setErrors] = useState({});
 
+  const [checkboxError, setCheckboxError] = useState("");
+
+  useEffect(() => {
+    setCheckboxError("");
+  }, [language]);
+
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
+    // Clear checkbox error when checkbox is checked
+    if (event.target.checked) {
+      setCheckboxError("");
+    }
   };
 
   // GET INSURANCE
@@ -214,11 +224,11 @@ export default function CTAForm() {
 
     // Check if the privacy policy checkbox is not checked
     if (!isChecked) {
-      // If privacy policy checkbox is not checked, display a toast message
-      toast.error("Please agree to the privacy policy", {
-        id: "privacy-policy-toast",
-      });
+      // If privacy policy checkbox is not checked, set checkbox error
+      setCheckboxError(errorMessages[language].privacyPolicy);
       hasErrors = true;
+    } else {
+      setCheckboxError(""); // Clear checkbox error if checked
     }
 
     // Clear any previous validation errors
@@ -294,6 +304,7 @@ export default function CTAForm() {
       phoneNumber: "Phone number with country code",
       insuranceProvider: "Please choose your medical insurance",
       specialists: "Please choose specialists",
+      privacyPolicy: "Please agree to the privacy policy",
     },
     cz: {
       emailEmpty: "E-mail je povinný",
@@ -302,6 +313,7 @@ export default function CTAForm() {
       phoneNumber: "Telefonní číslo s kódem země",
       insuranceProvider: "Prosím vyberte svoje pojištění",
       specialists: "Prosím vyberte specialisty",
+      privacyPolicy: "Souhlas s ochranou osobních údajů je povinný",
     },
     ru: {
       emailEmpty: "Требуется электронная почта",
@@ -310,6 +322,7 @@ export default function CTAForm() {
       phoneNumber: "Номер телефона с кодом страны",
       insuranceProvider: "Пожалуйста, выберите свою медицинскую страховку",
       specialists: "Пожалуйста, выберите специалистов",
+      privacyPolicy: "Пожалуйста, согласитесь с политикой конфиденциальности",
     },
   };
 
@@ -560,7 +573,9 @@ export default function CTAForm() {
             name="agreeToPrivacyPolicy"
             sx={{
               "&.MuiCheckbox-root": {
-                color: "var(--secondary-color)",
+                color: checkboxError
+                  ? "var(--error-color)"
+                  : "var(--secondary-color)",
               },
               "& .MuiSvgIcon-root": { fontSize: "2rem" },
               "&.Mui-checked": {
@@ -568,36 +583,53 @@ export default function CTAForm() {
               },
             }}
           />
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: "Montserrat",
-              color: "var(--white)",
-              fontSize: "1.4rem",
-            }}
-          >
-            {translations["ctaform.privacy"]}
-            {/* I have read and agree to the */}
-            <span
-              className="hover-effect"
-              style={{
-                cursor: "pointer",
-                color: "var(--secondary-color)",
-                textDecoration: "none",
-                transition: "text-decoration 0.3s ease",
+          <Box>
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "Montserrat",
+                color: "var(--white)",
+                fontSize: "1.4rem",
               }}
-              onClick={handleOpen}
-              onMouseEnter={(e) =>
-                (e.target.style.textDecoration = "underline")
-              }
-              onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
             >
-              {translations["ctaform.privacy2"]}
+              {translations["ctaform.privacy"]}
+              {/* I have read and agree to the */}
+              <span
+                className="hover-effect"
+                style={{
+                  cursor: "pointer",
+                  color: "var(--secondary-color)",
+                  textDecoration: "none",
+                  transition: "text-decoration 0.3s ease",
+                }}
+                onClick={handleOpen}
+                onMouseEnter={(e) =>
+                  (e.target.style.textDecoration = "underline")
+                }
+                onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
+              >
+                {translations["ctaform.privacy2"]}
 
-              {/* privacy policy */}
-            </span>
-            {language === "cz" && translations["ctaform.privacyCZ"]}
-          </Typography>
+                {/* privacy policy */}
+              </span>
+              {language === "cz" && translations["ctaform.privacyCZ"]}
+            </Typography>
+
+            {checkboxError && (
+              <Typography
+                variant="body2"
+                color="error"
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "500",
+                  fontSize: "1.1rem",
+                  color: "var(--error-color)",
+                }}
+              >
+                {checkboxError}
+              </Typography>
+            )}
+          </Box>
           <Modal
             open={open}
             onClose={handleClose}

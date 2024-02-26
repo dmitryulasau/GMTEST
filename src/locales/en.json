@@ -49,5 +49,7 @@
 
   "validation.insurance.required": "Please choose your medical insurance",
 
-  "validation.specialist.required": "Please choose specialists"
+  "validation.specialist.required": "Please choose specialists",
+
+  "ctaform.privacyError": "Please agree to the privacy policy"
 }
