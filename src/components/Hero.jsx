@@ -70,8 +70,8 @@ export default function Hero() {
             right: { xs: "30%", sm: "330px", md: 0 },
 
             maxWidth: {
-              xs: "40%",
-              sm: "22%",
+              xs: "30%",
+              sm: "18%",
               md: "32%",
               lg: "27.5%",
               xl: "30%",
@@ -108,6 +108,12 @@ export default function Hero() {
               minHeight: "34rem",
 
               display: "flex",
+              paddingRight: {
+                sm: "2rem",
+                md: "16rem",
+                lg: "4rem",
+                xl: "2rem",
+              },
               flexDirection: "column",
               justifyContent: { md: "center", lg: "space-between" },
               alignSelf: { sm: "flex-start", md: "center" },

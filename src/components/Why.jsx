@@ -43,7 +43,7 @@ export default function Why() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "3rem",
+            gap: "1rem",
             alignItems: "center",
             height: { lg: "35vh" },
 
