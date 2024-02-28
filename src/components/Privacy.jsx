@@ -32,7 +32,7 @@ export default function Privacy() {
 
   const [privacy, setPrivacy] = useState([]);
 
-  console.log(privacy);
+  // console.log(privacy);
   const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
   const translations =
     language === "cz"
