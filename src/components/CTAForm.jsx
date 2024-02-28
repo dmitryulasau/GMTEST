@@ -29,6 +29,8 @@ import czTranslations from "../locales/cz.json";
 import ruTranslations from "../locales/ru.json";
 import { useContext } from "react";
 
+import axiosInstance from "../axiosInstance.js";
+
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
@@ -69,7 +71,7 @@ const CssTextField = styled((props) => (
   },
   "& .MuiFormHelperText-root.Mui-error": {
     // Override error text color
-    color: "var(--error-color)", // Change this to the color you desire
+    color: "var(--error-color)",
   },
   "& .MuiInputLabel-root.Mui-error": {
     color: "#656565",
@@ -184,7 +186,7 @@ export default function CTAForm() {
       .catch((error) => {
         console.error("Error fetching specialists:", error);
       });
-  }, [language]); // Make sure to include language as a dependency
+  }, [language]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -255,7 +257,7 @@ export default function CTAForm() {
       isPrivacyPolicyConsentGiven: isChecked,
     };
 
-    axios
+    axiosInstance
       .post(
         "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
         payload
@@ -278,7 +280,7 @@ export default function CTAForm() {
         console.log(formData);
         // Handle errors
         console.error("Error submitting form:", error);
-        // Optionally, you can show an error message to the user
+
         toast.error("Something went wrong", {
           id: "error-toast",
         });
