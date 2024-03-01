@@ -13,6 +13,17 @@ import ruTranslations from "../locales/ru.json";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
+import CryptoJS from "crypto-js";
+
+const secretKey = import.meta.env.VITE_SECRET_KEY;
+const decodedKey = CryptoJS.enc.Base64.parse(secretKey);
+const hashedKey = CryptoJS.SHA256(decodedKey);
+
+const encrypted = CryptoJS.AES.encrypt("a", hashedKey, {
+  mode: CryptoJS.mode.ECB,
+  padding: CryptoJS.pad.Pkcs7,
+});
+
 // MODAL STYLE
 const style = {
   position: "absolute",
@@ -61,9 +72,16 @@ export default function Footer() {
           "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/eng";
     }
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     // Fetch specialists based on the determined endpoint
     axios
-      .get(privacysEndpoint)
+      .get(privacysEndpoint, config)
       .then((response) => {
         setPrivacy(response.data);
       })

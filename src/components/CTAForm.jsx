@@ -31,7 +31,7 @@ import { useContext } from "react";
 
 import CryptoJS from "crypto-js";
 
-const secretKey = "6asGzee9a0zgfBPsn1hyvbRRmYfUIrtx4sDqGGHFheg=";
+const secretKey = import.meta.env.VITE_SECRET_KEY;
 const decodedKey = CryptoJS.enc.Base64.parse(secretKey);
 const hashedKey = CryptoJS.SHA256(decodedKey);
 
@@ -155,16 +155,18 @@ export default function CTAForm() {
 
   // GET INSURANCE
   useEffect(() => {
+    const insuranceEndpoint =
+      "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers";
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers",
-        {
-          headers: {
-            Authorization: `Bearer ${encrypted}`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .get(insuranceEndpoint, config)
       .then((response) => {
         setInsuranceProviders(response.data);
       })
@@ -278,10 +280,18 @@ export default function CTAForm() {
       isPrivacyPolicyConsentGiven: isChecked,
     };
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     axios
       .post(
         "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
-        payload
+        payload,
+        config
       )
       .then((response) => {
         console.log("Form submitted successfully:", response.data);
@@ -399,9 +409,15 @@ export default function CTAForm() {
           "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/privacy-policy/eng";
     }
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
     // Fetch specialists based on the determined endpoint
     axios
-      .get(privacysEndpoint)
+      .get(privacysEndpoint, config)
       .then((response) => {
         setPrivacy(response.data);
       })
