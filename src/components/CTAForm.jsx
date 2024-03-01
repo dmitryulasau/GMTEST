@@ -142,6 +142,8 @@ export default function CTAForm() {
   const [checkboxError, setCheckboxError] = useState("");
 
   useEffect(() => {
+    setIsChecked(false);
+
     setCheckboxError("");
   }, [language]);
 
