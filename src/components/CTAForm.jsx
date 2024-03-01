@@ -29,7 +29,16 @@ import czTranslations from "../locales/cz.json";
 import ruTranslations from "../locales/ru.json";
 import { useContext } from "react";
 
-import axiosInstance from "../axiosInstance.js";
+import CryptoJS from "crypto-js";
+
+const secretKey = "6asGzee9a0zgfBPsn1hyvbRRmYfUIrtx4sDqGGHFheg=";
+const decodedKey = CryptoJS.enc.Base64.parse(secretKey);
+const hashedKey = CryptoJS.SHA256(decodedKey);
+
+const encrypted = CryptoJS.AES.encrypt("a", hashedKey, {
+  mode: CryptoJS.mode.ECB,
+  padding: CryptoJS.pad.Pkcs7,
+});
 
 const CssTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
@@ -148,7 +157,13 @@ export default function CTAForm() {
   useEffect(() => {
     axios
       .get(
-        "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers"
+        "https://cors-anywhere.herokuapp.com/https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers",
+        {
+          headers: {
+            Authorization: `Bearer ${encrypted}`,
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         setInsuranceProviders(response.data);
@@ -177,9 +192,15 @@ export default function CTAForm() {
           "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/specialists_eng";
     }
 
-    // Fetch specialists based on the determined endpoint
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     axios
-      .get(specialistsEndpoint)
+      .get(specialistsEndpoint, config)
       .then((response) => {
         setSpecialists(response.data);
       })
@@ -257,7 +278,7 @@ export default function CTAForm() {
       isPrivacyPolicyConsentGiven: isChecked,
     };
 
-    axiosInstance
+    axios
       .post(
         "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/guests",
         payload
