@@ -205,7 +205,7 @@ export default function Hero() {
               },
             }}
           >
-            <CTAForm />
+            {/* <CTAForm /> */}
           </Box>
           {/* FORM END */}
         </Box>

@@ -428,6 +428,7 @@ export default function CTAForm() {
       });
   }, [language]);
 
+  console.log(specialist);
   return (
     <Box sx={{ maxWidth: "29rem" }}>
       <div id="CTA" style={{}}></div>
@@ -576,11 +577,11 @@ export default function CTAForm() {
                   },
                 }}
               />
-              {/* {specialist.length > 20
+              {specialist.length > 20
                 ? `${(
                     specialist.charAt(0).toUpperCase() + specialist.slice(1)
                   ).substring(0, 20)}...`
-                : specialist.charAt(0).toUpperCase() + specialist.slice(1)} */}
+                : specialist.charAt(0).toUpperCase() + specialist.slice(1)}
             </MenuItem>
           ))}
         </CssTextField>
